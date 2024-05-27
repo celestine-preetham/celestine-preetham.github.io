@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: green;
+        }
+  #question-panel {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: white; /* White panel background */
+    padding: 20px; /* Padding around the content */
+    border-radius: 10px; /* Optional: rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow for depth */
+  }
+  	#background{
+    position: relative;
+	background-repeat: no-repeat;
+    background-position: center;
+  }
+</style>
+</head>
+<body>
+
+<div id="background" style="width: 100vw; height: 100vh;">
+  <!-- Background will change here -->
+</div>
+
+<div id="question-panel" style="display:none;">
+  <p>Guess the GGP of <span id="country">country</span></p>
+  <button onclick="checkAnswer(1)">1</button>
+  <button onclick="checkAnswer(2)">2</button>
+  <button onclick="checkAnswer(3)">3</button>
+  <button onclick="checkAnswer(4)">4</button>
+  <button onclick="checkAnswer(5)">5</button>
+  <button onclick="checkAnswer(6)">6</button>
+  <p> Score is <span id="score"> 0 </span> out of 180 </p>
+</div>
+
+<script>
+var images = ['RAIN.jpeg', 'SUN.jpeg', 'POP.jpeg','GGP.jpeg']; // Replace with your image URLs
+var index = 0;
+var score = 0;
+let countryGGP = [['Afghanistan' ,4],	['Angola' ,5],	['Albania' ,4],	['United Arab Emirates' ,3],	['Argentina' ,5],	['Armenia' ,4],	['Antigua and Barbuda' ,4],	['Australia' ,6],	['Austria' ,4],	['Azerbaijan' ,4],	['Burundi' ,4],	['Belgium' ,3],	['Benin' ,4],	['Burkina Faso' ,4],	['Bangladesh' ,4],	['Bulgaria' ,4],	['Bahrain' ,2],	['The Bahamas' ,5],	['Bosnia and Herzegovina' ,4],	['Belarus' ,4],	['Belize' ,5],	['Bolivia' ,5],	['Brazil' ,5],	['Barbados' ,4],	['Brunei Darussalam' ,5],	['Bhutan' ,5],	['Botswana' ,5],	['Central African Republic' ,6],	['Canada' ,5],	['Switzerland' ,4],	['Chile' ,5],	['China' ,4],	['Cote d\'Ivoire' ,4],	['Cameroon' ,5],	['Democratic Republic of Congo' ,5],	['Republic of the Congo' ,5],	['Colombia' ,5],	['Comoros' ,4],	['Cabo Verde' ,4],	['Costa Rica' ,5],	['Cuba' ,4],	['Cyprus' ,4],	['Czech Republic' ,4],	['Germany' ,4],	['Djibouti' ,4],	['Dominica' ,5],	['Denmark' ,4],	['Dominican Republic' ,4],	['Algeria' ,4],	['Ecuador' ,5],	['Egypt' ,3],	['Eritrea' ,4],	['Spain' ,4],	['Estonia' ,4],	['Ethiopia' ,4],	['Fiji' ,5],	['France' ,4],	['Gabon' ,6],	['United Kingdom' ,4],	['Georgia' ,4],	['Ghana' ,4],	['Guinea' ,5],	['The Gambia' ,4],	['Guinea-Bissau' ,5],	['Equatorial Guinea' ,5],	['Greece' ,4],	['Grenada' ,4],	['Guatemala' ,4],	['Guyana' ,6],	['Honduras' ,5],	['Croatia' ,4],	['Haiti' ,4],	['Hungary' ,4],	['Indonesia' ,4],	['India' ,4],	['Ireland' ,4],	['Iran' ,4],	['Iraq' ,4],	['Israel' ,3],	['Italy' ,4],	['Jamaica' ,4],	['Jordan' ,3],	['Japan' ,4],	['Kazakhstan' ,5],	['Kenya' ,4],	['Kyrgyzstan' ,4],	['Cambodia' ,5],	['Saint Kitts and Nevis' ,4],	['South Korea' ,4],	['Kuwait' ,3],	['Laos' ,5],	['Lebanon' ,3],	['Liberia' ,5],	['Libya' ,5],	['Saint Lucia' ,4],	['Sri Lanka' ,4],	['Lesotho' ,4],	['Lithuania' ,4],	['Luxembourg' ,4],	['Latvia' ,4],	['Morocco' ,4],	['Moldova' ,4],	['Madagascar' ,5],	['Maldives' ,3],	['Mexico' ,4],	['North Macedonia' ,4],	['Mali' ,5],	['Malta' ,3],	['Myanmar' ,5],	['Mongolia' ,5],	['Mozambique' ,5],	['Mauritania' ,5],	['Mauritius' ,4],	['Malawi' ,4],	['Malaysia' ,5],	['Namibia' ,5],	['Niger' ,4],	['Nigeria' ,4],	['Nicaragua' ,5],	['Netherlands' ,3],	['Norway' ,5],	['Nepal' ,4],	['New Zealand' ,5],	['Oman' ,4],	['Pakistan' ,4],	['Panama' ,5],	['Peru' ,5],	['Philippines' ,4],	['Papua New Guinea' ,5],	['Poland' ,4],	['Puerto Rico (U.S.)' ,4],	['North Korea' ,4],	['Portugal' ,4],	['Paraguay' ,5],	['West Bank and Gaza' ,3],	['Qatar' ,3],	['Romania' ,4],	['Russia' ,5],	['Rwanda' ,4],	['Saudi Arabia' ,4],	['Sudan' ,4],	['Senegal' ,4],	['Singapore' ,3],	['Solomon Islands' ,5],	['Sierra Leone' ,5],	['El Salvador' ,4],	['Somalia' ,4],	['South Sudan' ,5],	['São Tomé and Príncipe' ,4],	['Suriname' ,6],	['Slovakia' ,4],	['Slovenia' ,4],	['Sweden' ,4],	['Eswatini' ,4],	['Seychelles' ,4],	['Syrian Arab Republic' ,4],	['Chad' ,5],	['Togo' ,4],	['Thailand' ,4],	['Tajikistan' ,4],	['Turkmenistan' ,4],	['Timor-Leste' ,5],	['Trinidad and Tobago' ,4],	['Tunisia' ,4],	['Turkey' ,4],	['Tanzania' ,4],	['Uganda' ,4],	['Ukraine' ,4],	['Uruguay' ,5],	['United States' ,5],	['Uzbekistan' ,4],	['Saint Vincent and the Grenadines' ,4],	['Venezuela' ,5],	['Vietnam' ,4],	['Vanuatu' ,5],	['Samoa' ,5],	['Yemen' ,4],	['South Africa' ,4],	['Zambia' ,5],	['Zimbabwe' ,5]];
+shuffle(countryGGP); 
+let current = countryGGP.pop();
+document.getElementById('country').textContent = current[0];
+function changeBackground() {
+  if(index < images.length) {
+    document.getElementById('background').style.backgroundImage = "url('" + images[index] + "')";
+    index++;
+  } 
+  else {
+  document.getElementById('question-panel').style.display = 'inline';
+  index = 0;
+  }
+}
+
+var interval = setInterval(changeBackground, 1000); // Change image every 1 second
+
+
+function checkAnswer(guess) {
+  if(guess === current[1]) {
+  score++;
+  document.getElementById('score').textContent = score;
+  }
+  else {
+    alert('No,it is '+current[1]);
+  }
+  if(countryGGP.length>0)
+  {
+	current = countryGGP.pop();
+	document.getElementById('country').textContent = current[0];
+	}
+	else{
+	document.getElementById('question-panel').style.display = 'none';
+	alert('Congrats!, you are blessed to know that almost the entire world is naturally rich. Is that not beautiful? Your score is '+score+' out of 180.');
+	clearInterval(interval);  //Stop changing the background
+	document.getElementById('background').style.display = 'none';
+  }
+}
+
+function shuffle(array) {
+  let currentIndex = array.length;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+}
+</script>
+</body>
+</html>
