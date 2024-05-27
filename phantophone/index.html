@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+	 body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+           align-items: center;
+            background: black;
+        }
+		
+	  #video-container {
+            position: relative;
+        }
+        #game-container {
+            position: absolute;
+        display : flex;
+			align-items: center;
+			 justify-content: center;
+		   }
+        .xylophone-key {
+            display: inline-block;
+            width: 50px;
+            height: 150px;
+            background-color: white;
+            margin: 5px;
+            cursor: pointer;
+            position: relative;
+			transition: background-color 0.1s; /* Add transition effect */
+        }
+		.xylophone-key.clicked {
+            background-color: #ffcc00; /* Change color when clicked */
+        }
+
+    </style>
+</head>
+<body>
+
+   
+
+	
+    <!-- Add other keys similarly -->
+
+<div id="video-container">
+   <div class="xylophone-key" id="0" onclick="playNote(0)"> </div>
+	<div class="xylophone-key" id="1" onclick="playNote(1)"> </div>
+	<div class="xylophone-key" id="2" onclick="playNote(2)"> </div>
+	<div class="xylophone-key" id="3" onclick="playNote(3)"> </div>
+	<div class="xylophone-key" id="4" onclick="playNote(4)"> </div>
+	<div class="xylophone-key" id="5" onclick="playNote(5)"> </div>
+	<div class="xylophone-key" id="6" onclick="playNote(6)"> </div>
+	<div class="xylophone-key" id="7" onclick="playNote(7)"> </div>
+	<div id="game-container">
+	 <button id="startButton" style="background-color: #000; color:gold" onclick="startGame()"> 
+A phantom's tune, from behind the scenes,<br>
+Click and score, as your spirit believes.<br>
+Eyes closed, ears open, let scores increase,<br>
+In this pressing game, find your peace!</button>  
+
+
+<div id="Score" style="color: gold;">Score: <span id="score">0</span></div> </div>
+	</div>
+ 
+ 
+
+
+
+
+    <script>
+        const notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C5'];
+		const audios = [];
+		let score=0;
+		let flag =0;
+		document.getElementById('Score').style.display = 'none';
+		for (i=0;i<8;i++) {audios.push(new Audio(`${notes[i]}.wav`));};
+        function playNote(q) {
+			if(flag==0)
+			{
+            // Simulate playing the note (you can replace this with actual audio playback)
+            console.log(`Note ${notes[q]} played!`);
+			audios[q].play();
+			}
+			else
+			{
+            // Add scoring logic here (e.g., increment score if correct key pressed)
+			 if (p === q) {
+                score++;
+                document.getElementById('score').textContent = score;
+            }
+			else { score--;document.getElementById('score').textContent = score;}
+			setTimeout(startGame,100);
+			}
+        }
+    
+	function startGame() {
+  // Randomly select a phantom note to play (you can modify this logic)
+        p = Math.floor(Math.random() * notes.length);
+        console.log(`Random note: ${notes[p]}`);
+		audios[p].play();
+		// Change color of the phantom key
+            const clickedKey = document.getElementById(p);
+            clickedKey.classList.add('clicked');
+            setTimeout(() => {
+                clickedKey.classList.remove('clicked');
+            }, 10); // Reset color after 100ms
+			if(flag==0)
+			{
+			 // Hide the Start Game button
+           document.getElementById('startButton').style.display = 'none';
+			// Show the score
+			document.getElementById('Score').style.display = 'initial';
+			flag=1;}
+			
+        }
+		
+    </script>
+</body>
+</html>
