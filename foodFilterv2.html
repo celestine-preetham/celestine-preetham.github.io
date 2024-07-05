@@ -1,0 +1,5786 @@
+<!DOCTYPE html>
+<h1>Fiber Filter</h1>
+  <style>
+        .my-div {
+            white-space: pre-line; /* This preserves line breaks */
+        }
+    </style>
+
+<input id="ingredientsInput" list="ingredients" onfocus="this.value=''" placeholder="Search ingredient" >
+<datalist id="ingredients">
+</datalist>
+<input type="number" id="quantity" placeholder="Enter quantity (g)" >
+<input type="submit" onClick="onSubmit()">
+
+<h3>Total dietary fiber is <span id="totF">0</span> g</h3>
+<div class="my-div" id="searchPhrases"></div>
+<script>
+// JavaScript:
+function readFile(file) {
+  reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = function() {
+ingredients = fileContent.split('\n');
+	fiberdat = fiber.split('\n');
+	  datalist = document.querySelector("datalist");
+
+  for (i=0;i<ingredients.length;i++) {
+    const option = document.createElement("option");
+    option.value = ingredients[i]+" : "+fiberdat[i];
+	option.textContent = fiberdat[i]+" g fiber per 100 g of diet";
+    datalist.appendChild(option);
+  }
+	 };
+	displayText = ""; 
+	totF = 0;
+}
+
+function onSubmit(){
+ iText = document.getElementById('ingredientsInput').value;
+ qText = document.getElementById('quantity').value;
+ displayText += '\n'+ iText+"*"+qText/100+ " in "+qText+" g"
+ curr= iText.split(' ').pop()*qText/100;
+ totF+=curr;
+ document.getElementById("searchPhrases").textContent = displayText ;
+ document.getElementById("totF").textContent = totF;
+}
+
+// Total Fiber
+const fiber = `7.7
+1.3
+0
+36.3
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.4
+0
+0
+0
+0
+0
+0.8
+0
+1.2
+10.6
+10.6
+0
+6.7
+0
+0.2
+0
+0
+0
+3.8
+0
+7.7
+0
+2.8
+0
+0
+7
+3
+3.8
+3.8
+6.8
+5
+2.8
+0
+9.4
+0
+0
+4.7
+3.3
+2.6
+2.5
+2.5
+2.1
+0
+5.4
+6.3
+2.5
+7.2
+0
+0
+0.2
+2.8
+5
+3.8
+5.8
+6.8
+6.7
+6.6
+4
+4.9
+0
+5.3
+4.2
+2.6
+0
+6.8
+6.4
+0
+0
+6
+4.9
+7.2
+5
+3.1
+7.5
+6.4
+6.1
+4.3
+9.6
+2.6
+8.7
+5.3
+2.3
+3.3
+3.9
+6.4
+9.7
+7.7
+6.9
+6.8
+6.7
+5.4
+3.6
+7.2
+7.8
+0.8
+8
+7.9
+7.8
+4
+7
+6.9
+6.8
+0
+6.1
+4.4
+0
+3.1
+6.7
+5.8
+0.1
+6.9
+4.8
+1.8
+8.3
+7.2
+0.1
+2.2
+0.1
+8.4
+0
+8.2
+8.3
+0
+0
+4.3
+4.6
+4.8
+0
+0
+0
+0
+0
+0
+0
+0
+1.4
+3.3
+0
+0
+0
+1.5
+0
+0
+0
+0
+0
+0
+0
+1.4
+1.3
+1
+0
+0
+0
+9
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1.8
+0
+0
+0.3
+1.9
+0
+0
+0
+1.3
+1.9
+0
+0
+0.5
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.4
+0
+0
+0
+0
+0
+0
+0.6
+0
+0.1
+0
+0
+0
+0
+0
+0.7
+0.6
+
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.1
+0.5
+3.8
+0.8
+0.8
+0.6
+0
+0
+0
+1
+0
+0
+6.7
+2.8
+0
+0
+2.6
+1.2
+0
+1
+0.4
+0.2
+8
+0.8
+0
+0
+0.2
+1
+0.6
+
+0
+0.3
+2.3
+0.5
+0.8
+0.1
+0.3
+0.3
+0
+0
+0
+0
+0
+2.9
+0
+0
+3.7
+0.9
+0.7
+0.2
+1.1
+0.1
+3.7
+3.5
+1.8
+0
+0
+0.8
+0.9
+0.8
+3
+0.8
+4.5
+2.4
+0
+1
+0
+0
+1.9
+5.5
+1
+0.1
+0.4
+1.3
+0
+3.5
+1
+1.4
+2
+0.5
+0.3
+0.4
+0
+0
+0.1
+4.5
+12
+3.6
+17
+8.1
+0
+2.1
+0.3
+2.5
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.9
+2.1
+1.1
+0.7
+0
+0
+2.1
+2.1
+0.1
+6.3
+0.9
+1.2
+
+
+0.3
+0.6
+0.1
+0.6
+0.8
+0.6
+0.6
+0.6
+0
+0
+0
+0.2
+0
+0
+0
+0.3
+0.8
+0.3
+0.4
+0
+1.1
+3.7
+0.6
+2
+0.6
+0
+0.1
+3.9
+0.6
+0.5
+0.5
+4.8
+0.8
+0.8
+0.5
+0.5
+0.5
+1.1
+0.5
+0
+0.8
+0.1
+0
+0.6
+0.5
+0.6
+0.5
+1
+1.1
+0
+0
+0.8
+0.1
+0.3
+0
+2.7
+0.9
+1.1
+2.6
+0
+0
+1.3
+2.6
+0.6
+0.1
+3.9
+0.3
+3.9
+7
+0.5
+0.5
+0
+2
+0
+0
+1
+0.5
+0
+0.1
+0
+0.2
+0.3
+3
+1.5
+2
+0.6
+1
+0.6
+1.3
+0.6
+0.6
+0.6
+0.6
+0.6
+0
+0.2
+0.2
+0
+0
+0
+0
+0
+0.1
+0.1
+0
+0.9
+1.2
+1.1
+1.9
+0.6
+3.3
+0.6
+3.3
+0.6
+1.1
+0
+0
+0.6
+0.3
+0.9
+0.3
+0.3
+0
+0
+0
+0
+0
+0
+1.1
+0
+0
+0
+2.9
+3.2
+10.3
+1.1
+0.7
+1.1
+0.6
+0.4
+1.8
+1.2
+0.5
+0.3
+0.2
+0.8
+0
+0
+1.2
+0.2
+0.4
+0.4
+0.4
+1.4
+1.2
+0.3
+3.3
+0.9
+0
+0.4
+0.4
+0.3
+0.3
+0
+0.7
+0
+0
+0.3
+0
+2.1
+2.3
+2.2
+2.7
+2.5
+2.1
+0
+0.6
+0
+0
+0.1
+4.3
+3.5
+0.8
+
+0
+1.4
+0.3
+1.1
+0.9
+0.4
+0.4
+1.4
+1.8
+0.2
+0.8
+0
+1.6
+0
+0
+0.1
+0.4
+0.4
+0
+0
+0
+1.5
+0.1
+0.1
+0
+0
+0.5
+1.1
+0
+0
+1.2
+0.2
+1.9
+0.2
+0.2
+5.2
+0.3
+1.5
+1.5
+0.2
+2.1
+0
+1
+0.7
+1.4
+3
+0
+0
+1.5
+0
+0
+0
+0
+0
+0.1
+0
+0
+0.1
+0
+0.4
+2.2
+0.3
+0.3
+0
+0.1
+1.2
+4.6
+1.4
+0.3
+3.9
+1.5
+0
+0
+2.3
+0.5
+1.2
+0.2
+1
+5.9
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.7
+0
+0
+0.9
+0.7
+2.1
+0.4
+1.3
+0.6
+0.1
+3.3
+3.2
+0.2
+0
+0
+0.4
+3.6
+1.7
+1.7
+1.5
+1.5
+0
+0
+1.4
+0
+1.5
+1.7
+1.5
+0.6
+0.8
+1.5
+0.5
+1.5
+0
+0
+0
+0
+0
+0
+2.5
+2.5
+0
+0
+0
+0
+2.2
+0
+0
+0
+0
+0.5
+0.3
+0
+0
+22
+0
+0
+1.3
+7.3
+5.3
+0
+0
+3.1
+0
+0
+0
+1.8
+2.7
+0
+1.5
+1.3
+1.4
+10.2
+10.2
+3.3
+1.2
+0.2
+1.9
+0.9
+1.2
+1.2
+9
+2.5
+3.2
+2.3
+2.4
+1.8
+0.4
+1.9
+0.7
+0.2
+1.4
+0.2
+0.5
+1.2
+0.1
+2.6
+0.2
+0.5
+0.2
+1.1
+0
+0.7
+2.5
+0.1
+0
+0.9
+0
+0
+0
+0.3
+0
+0
+0
+0
+7.4
+8.9
+4.6
+4.3
+1.3
+0.6
+3
+1.3
+2.1
+0.7
+0.7
+2.4
+0
+2.6
+2.2
+0
+1.2
+0.3
+0.1
+5
+14.8
+5
+1.6
+0.6
+1.4
+0.7
+1.6
+12.5
+3
+2.7
+2.5
+1.1
+0.2
+0.1
+2
+0
+2
+0.1
+0
+0
+2.9
+2
+1.5
+1.4
+2.6
+0.1
+0
+2.9
+0
+0
+1.7
+0
+0.1
+0.6
+0.2
+0
+0.3
+0
+0.6
+2.3
+0.1
+0.8
+3
+0.9
+0
+2.5
+3.3
+2.8
+4
+4
+4.1
+2.6
+3.5
+3.3
+3
+3.9
+4.6
+4.2
+5.1
+0.9
+0
+7.3
+2.5
+4.7
+0.3
+0
+0
+5.5
+5.5
+0
+0
+0.5
+0
+3.6
+0.9
+1.2
+1.8
+0
+0.1
+0
+0
+0
+0
+1.4
+1.8
+0.2
+0
+0.5
+4
+0
+1.6
+2.4
+6.6
+0
+1.1
+1.3
+1
+0
+0
+0
+0.2
+0.2
+0.2
+1.2
+0.5
+0.5
+0
+0
+1.3
+7.6
+2.5
+3.2
+0
+2.5
+2.5
+1.1
+0.1
+0.3
+0.6
+0.3
+0.3
+0
+0
+0
+0
+0
+0
+0.2
+0.1
+0
+2.1
+0
+0.2
+0
+0.9
+2.4
+2
+0
+0.1
+0
+0.5
+0
+0.3
+0.3
+0
+0.4
+0
+0.1
+1.8
+0
+0
+0
+1.5
+0
+0
+4
+0.6
+0.3
+5.8
+2.5
+4.9
+8.5
+2.1
+0.7
+2
+0.6
+2.9
+2.6
+1.5
+2.7
+0.3
+2
+3.6
+2.1
+0.3
+2.2
+0
+0.3
+0.3
+0.7
+0
+0
+0.1
+0
+0
+0
+2.3
+1.8
+3.2
+6.7
+6.3
+1
+1.7
+0.3
+0.1
+0.4
+0
+0
+0.4
+0.4
+1.7
+2.8
+34
+45
+2.4
+0
+0
+0
+0.4
+0
+0.6
+0
+1.3
+1.1
+5.6
+1.2
+1.3
+1.8
+1.9
+3.1
+0
+0
+0
+0.1
+0.7
+0
+0.8
+1.6
+0
+2.3
+6.5
+0.2
+1.1
+0.8
+0.7
+0
+0.3
+0.5
+0
+0.9
+0.1
+0.3
+0.8
+1.2
+0.6
+0
+0
+0
+0
+1.2
+0.1
+0.1
+0.2
+0.2
+0.2
+0
+2
+0.4
+0.1
+0
+4.6
+4.6
+7.5
+7.5
+7
+7
+9.5
+9.5
+6.8
+6.8
+6.8
+8.6
+7
+2.3
+3.8
+3.8
+4.1
+1
+1.3
+2.9
+0.5
+1
+6.2
+11.8
+7.2
+14.7
+0
+6.6
+6.6
+0
+7
+1.7
+1
+1.9
+1.3
+1.3
+2
+1.6
+4.3
+1.2
+1.3
+1.3
+1.3
+2.4
+2.3
+2.5
+3.1
+2.8
+2.9
+3.3
+2.3
+2.7
+2.2
+1.3
+1.5
+1.4
+1.7
+1.7
+1.7
+1.9
+1.2
+2
+1.8
+6
+1.6
+1.5
+2
+1.6
+3
+1.6
+1.8
+1.6
+0.9
+1.7
+4.9
+1.8
+2.3
+1.8
+1.9
+2.1
+2.2
+1.8
+1.8
+1.8
+2.3
+7
+0.1
+0
+0
+0
+0.1
+1.3
+0
+0
+1.2
+1.5
+3.3
+2.5
+45
+2.5
+2.5
+2.5
+27
+2.6
+11
+4.5
+1.3
+1.4
+2.6
+0
+0.2
+0.1
+0.2
+1.4
+0
+0
+0
+9
+3.2
+2.4
+0.9
+1.4
+1
+2
+0
+0
+0.1
+0.2
+0
+0.4
+3.2
+1.8
+2
+6.3
+2.1
+3.5
+4.7
+1.3
+2.5
+1.1
+3.7
+4.3
+0
+0.3
+2
+0.3
+0.1
+1.3
+0.3
+6.5
+1.7
+4.2
+1.1
+3.4
+3.6
+1.2
+2.4
+0.9
+0.9
+1
+0
+0
+0
+1.5
+0
+1.9
+1.9
+9.5
+9.6
+2.1
+5
+2.3
+8
+8
+1.4
+1
+2.5
+0.5
+4.8
+2.5
+3.5
+2.4
+1.4
+3.7
+2.8
+3
+2.4
+2.7
+1.3
+1.4
+2.5
+2
+1.8
+4.5
+4.5
+3.1
+2.4
+1.2
+1.7
+2.1
+2
+3.2
+1.5
+2.7
+2.7
+2.7
+1.7
+2.5
+2.5
+4.7
+4.9
+2.3
+2.3
+3.6
+2.9
+2.8
+2.8
+4.9
+4.5
+4.2
+4.5
+2.6
+0
+4
+1.9
+0
+1.6
+1.9
+3
+3
+1.3
+3.4
+5.6
+16
+7.5
+5.1
+1.1
+8.2
+5.8
+23.9
+6.1
+12.7
+4.2
+2.2
+8
+1.9
+2.5
+13.7
+12.7
+2.7
+2
+4.2
+3
+1.3
+2.2
+3.5
+10
+11.1
+8.4
+4.1
+10.5
+6.9
+2.6
+4.1
+10.3
+5.6
+5.6
+6
+11.3
+13.4
+3.3
+22
+3.2
+2.9
+3.8
+2
+4
+2
+2.7
+2.1
+2.3
+2.5
+1.2
+2
+5
+0.2
+1.5
+3.1
+2.9
+2.8
+2.2
+1.8
+1.1
+3.5
+2
+1.3
+8
+15
+0.3
+3.1
+1.7
+2.3
+0.1
+0
+1
+0
+1.5
+1.5
+10.3
+1.5
+8.2
+6.7
+1.7
+0.8
+2.1
+1.4
+2.2
+2.4
+0
+0
+0
+0
+0
+0
+0.5
+0
+0
+0.1
+0.2
+0.1
+0
+0
+0
+0
+0.3
+0.1
+0
+0.5
+0
+0
+0.2
+0
+0
+0.4
+0
+0
+0
+0
+0
+0
+0.1
+0
+0
+0
+0
+0.1
+0
+0
+0
+0.5
+1
+4.1
+3.1
+3.8
+6.3
+1.4
+1.9
+0
+0.5
+0.7
+0.6
+0.5
+1.4
+1.7
+0.9
+1.8
+0.8
+1.3
+0.7
+0.8
+4.7
+0.1
+0.3
+4.3
+3.4
+0.5
+6.5
+9
+3.3
+1.4
+9.1
+5
+2.5
+0.7
+0.1
+4.8
+3
+2.3
+8.6
+0
+0
+0
+0
+0.1
+0
+0
+0
+0.1
+0.1
+0
+4
+3.3
+5.2
+12.2
+6
+3.6
+5.7
+2.5
+0.2
+0.2
+0.1
+0.4
+0
+1.8
+3.4
+0.2
+6.4
+12.3
+7.3
+0.8
+1.6
+1.4
+0.3
+0.3
+1.1
+2
+1.1
+0.4
+0
+0
+0
+0
+0.6
+1.1
+0.4
+0.9
+0.1
+0
+0
+0.1
+1.8
+0
+1.4
+2.4
+0
+0
+2.9
+1.4
+1.4
+2.5
+0.8
+2.2
+1.4
+5
+4.6
+0.6
+2.4
+4.2
+1.4
+1.4
+4.5
+4.1
+4.5
+1.7
+2.5
+2.2
+1.8
+1.9
+1.7
+2.2
+1.8
+2.2
+1.8
+4.1
+2.2
+2.5
+0.9
+0
+3
+0.1
+2
+1.8
+3.2
+3.2
+0.9
+0.2
+0.9
+0.1
+0
+0
+0
+0.2
+0.2
+0.1
+0
+0
+0.1
+2
+2.8
+2.7
+1.3
+0
+4
+3
+2
+0.2
+0.2
+4.2
+0.7
+0.1
+0
+0
+0.4
+20.5
+9.8
+4
+6
+2.7
+12.7
+12.3
+6.7
+0.7
+8.5
+3.3
+4.9
+3
+2.8
+1
+7.5
+3.3
+3.3
+0
+0.1
+0.1
+0.6
+0.1
+5.4
+0.5
+2.1
+2.3
+16.4
+0.4
+5.6
+0.1
+0.6
+0.6
+5.1
+0
+0
+0.1
+7.2
+6.5
+0.5
+1.3
+1.2
+3
+3.5
+0.2
+0.2
+1.5
+0.9
+3.3
+7
+2.2
+1.8
+3.2
+2
+3
+11
+0
+7.2
+3.8
+7.1
+7.9
+6.1
+0.5
+6.2
+3.3
+0
+0
+0.2
+0.1
+0
+0
+1.2
+34.8
+7.3
+3
+2.5
+5
+2.5
+2.2
+7.2
+2.7
+14.8
+8.6
+0.3
+0.9
+3
+1.5
+6.5
+7.1
+4.4
+8.5
+6.6
+3.2
+0.2
+34.1
+2.1
+2.9
+0
+0
+1.1
+2.3
+0.5
+1
+1.3
+0
+0
+1.5
+0.5
+0
+0.3
+1.5
+0
+0.6
+2.3
+0.2
+0.2
+1.6
+0.2
+5.8
+5.1
+0.1
+3.8
+0
+1.2
+1.1
+1
+0.1
+0.1
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.1
+0
+0
+0
+0.1
+0
+2.4
+0.2
+0.2
+1.7
+3.2
+14.4
+9
+12.5
+0.2
+7.6
+5.5
+8
+2
+0.9
+0.2
+5.3
+1
+1.2
+0.8
+6.6
+1.7
+1.2
+2.8
+1.2
+8.2
+0.7
+1.8
+1.2
+0.3
+3.4
+0
+2.8
+0
+0
+0.8
+3.3
+0
+1
+6.3
+2.8
+2.8
+8.8
+0.5
+3.7
+6.2
+8.9
+9.9
+1.7
+1.2
+8.1
+4.8
+1.1
+1
+1.3
+0
+0
+1.6
+8.1
+0.1
+0
+0.5
+0
+1.7
+0.1
+0.1
+4.1
+9.8
+1.3
+1.2
+0
+1.8
+1.7
+0
+0
+0
+0
+0
+8
+7.9
+0
+25.8
+4.8
+3.3
+1.9
+0
+2.4
+1.9
+1.2
+1.2
+6.5
+1.5
+5.5
+2.2
+3.7
+2
+0.1
+1.4
+1
+2.9
+0
+0
+3
+3.8
+0
+0
+0
+0
+0
+4.6
+0
+2.4
+0
+0
+0
+0
+0
+0.3
+0
+0
+0
+0.3
+0.3
+0
+0
+0.5
+0
+5.2
+0
+0
+0
+0
+2.5
+
+0
+0
+0
+0
+0.5
+0.7
+0.8
+0.9
+0.6
+0.9
+0.6
+0.3
+2
+0
+1.3
+0
+6.6
+2.3
+0.7
+2.1
+0.9
+0.9
+1.6
+1.4
+4.6
+3
+2.5
+0.1
+0.2
+0.2
+0
+5.5
+0.7
+3.2
+3
+1.2
+2.4
+4.2
+2
+0.7
+3.1
+0
+0.8
+0.2
+0.7
+0.1
+0.3
+0.7
+2.1
+0
+0
+0
+0
+0
+0
+0
+0
+4
+8.5
+12.4
+24
+0
+0
+0
+2.7
+22
+11.5
+10.5
+9.6
+0.3
+0
+1.8
+24.9
+8
+0
+0.2
+1.7
+0.3
+2.6
+20.9
+0
+34.4
+3.6
+2.2
+0
+1.9
+4.3
+3
+0.5
+4.6
+3.6
+3.1
+3.8
+3.2
+8.5
+6
+3.9
+3.4
+17.6
+3.2
+4.2
+1.9
+0.5
+0.4
+1
+3.2
+14.6
+2.7
+13.7
+7
+5.2
+2.2
+2.3
+3.6
+4.8
+3
+15.4
+9.5
+9.2
+2.4
+4.7
+0.2
+10.3
+4.7
+18.1
+6.8
+2.9
+2.3
+6.3
+8.5
+8.8
+5.1
+6.3
+0
+11.5
+2.8
+1
+1.9
+3.3
+2.9
+8.5
+0
+5.8
+2.2
+2.8
+1
+1.9
+12.3
+3
+3
+3.2
+0
+14.5
+5.1
+10.6
+0.6
+5.2
+4.6
+4.6
+5.9
+26.4
+4
+24.4
+11.3
+15
+2.8
+1.2
+0.6
+5.6
+15.3
+4
+4
+4
+0.2
+5.1
+2.6
+8.9
+4.7
+18.1
+19.9
+1.9
+8.3
+1.8
+4.4
+3.4
+0
+9.8
+18
+23.4
+1.7
+5.3
+1.7
+2
+6.4
+1.2
+5.3
+9.6
+1.2
+2.3
+0.7
+1.7
+0.8
+0.5
+1.1
+1.8
+2.2
+20.4
+2.3
+3.3
+4.7
+3.8
+1.5
+1.7
+5
+2
+2.5
+1
+1.5
+5.2
+2.7
+1.6
+3.2
+4.5
+0.5
+1.4
+7.6
+0
+1.2
+2
+0.2
+8.4
+1.2
+1
+7.2
+1.7
+1.4
+0.3
+0.9
+3.1
+2.8
+1
+9
+0.5
+3.9
+0.5
+4.9
+0
+0.8
+0.2
+6.4
+2.1
+3.5
+2.1
+2.8
+2
+0.9
+0
+1.2
+1.2
+1.6
+0.3
+0
+0.1
+0
+1.8
+1.9
+1.6
+3.6
+1
+1.9
+1.7
+1.1
+1.2
+1.4
+1
+1.7
+3.5
+2.6
+1.5
+0
+0.8
+0.8
+0.2
+0.1
+2
+1.7
+3.6
+0.2
+0.2
+1
+0.4
+0
+0.1
+0
+0.1
+0.4
+2.5
+2.5
+1
+1.1
+1.7
+2.4
+3.4
+3.6
+1.8
+1.4
+2.4
+0.4
+2.1
+1.4
+2.2
+0.9
+14.4
+7.5
+2
+9
+0.3
+1
+1
+0.9
+0.4
+0
+0.4
+0.6
+0.2
+0.3
+0
+0
+0
+0
+0
+0.4
+0
+0
+0
+0
+0
+0
+0
+0
+0.4
+0
+0
+0
+0
+0
+1
+2.5
+0
+0.6
+0.3
+0.2
+3.1
+3.1
+0.9
+2.5
+2
+1.2
+1.1
+0.1
+1.3
+1.5
+1.4
+0.3
+1.8
+0
+0
+0
+0.9
+0
+0.5
+0
+0.7
+0.1
+2.5
+2
+0.5
+0
+0.6
+0.6
+1
+0.9
+4.7
+0.3
+0.4
+2.8
+0
+2.6
+0.4
+0.9
+2.7
+2.7
+0.5
+0
+0
+0.1
+0
+0
+2.3
+0
+6.3
+2.9
+1.5
+0.3
+0.1
+0
+0
+0.3
+0.1
+0.3
+0
+0
+0
+0
+0.4
+0
+0.1
+0.8
+0.9
+1.4
+0
+0
+0
+0
+0
+0
+0
+0
+0.1
+0.5
+0.4
+0
+0
+3.4
+1
+0
+0
+0
+0.1
+0
+0
+0
+0
+0.1
+0
+0
+0.3
+0
+0
+0.3
+0
+0
+0
+9.6
+2
+1.8
+0.1
+0
+1.4
+1.5
+24.4
+0
+1.9
+0
+37.7
+25
+5
+13
+4.3
+74.7
+2.2
+1.7
+0.2
+1.1
+0
+1.5
+1.9
+1.6
+1.9
+1.7
+0
+0
+1.1
+0.3
+0
+1.6
+1.1
+3.8
+7.02
+7.47
+11.49
+15.64
+10.22
+12.24
+3.67
+3.30
+14.66
+11.18
+3.46
+2.56
+4.43
+3.74
+2.81
+7.72
+6.39
+2.76
+11.36
+11.23
+8.81
+9.72
+9.28
+9.55
+15.15
+25.22
+11.93
+20.41
+11.54
+11.70
+23.40
+22.40
+22.99
+9.37
+17.04
+7.88
+10.43
+16.82
+16.66
+15.12
+17.01
+17.74
+16.95
+16.57
+9.06
+22.84
+13.37
+21.55
+22.63
+8.60
+4.41
+4.91
+4.60
+5.10
+5.57
+2.21
+4.01
+3.64
+2.12
+1.97
+4.29
+2.01
+2.98
+2.76
+2.21
+3.43
+5.60
+8.21
+4.90
+2.60
+4.59
+3.89
+2.76
+1.79
+3.92
+1.91
+3.87
+6.74
+2.25
+1.82
+1.27
+2.38
+10.70
+3.37
+1.55
+4.50
+3.78
+3.49
+3.72
+2.12
+2.10
+2.11
+3.57
+4.01
+4.26
+4.04
+4.13
+3.68
+3.32
+4.01
+4.00
+3.90
+4.12
+3.89
+3.92
+3.87
+3.99
+3.74
+3.94
+4.38
+3.97
+3.73
+3.85
+3.98
+8.63
+2.06
+2.19
+2.19
+3.71
+2.09
+1.55
+4.83
+3.01
+2.33
+6.09
+2.14
+2.13
+2.46
+6.83
+5.64
+6.19
+4.38
+4.18
+7.69
+8.63
+2.75
+3.00
+3.25
+4.08
+3.01
+5.21
+2.28
+2.61
+6.32
+5.25
+3.60
+2.12
+2.53
+2.56
+5.90
+1.81
+1.85
+2.27
+2.27
+2.29
+2.00
+1.62
+1.58
+1.77
+2.30
+1.84
+2.59
+2.54
+2.06
+2.07
+3.32
+0.59
+6.69
+6.31
+2.21
+2.33
+1.98
+1.94
+4.35
+2.12
+4.07
+5.10
+8.95
+9.10
+6.52
+4.64
+7.75
+1.35
+1.25
+1.28
+1.64
+1.28
+1.15
+8.59
+7.39
+3.62
+3.07
+7.25
+0.00
+2.07
+1.34
+1.88
+1.67
+1.55
+2.02
+1.77
+1.97
+1.73
+1.87
+4.40
+1.51
+1.49
+1.29
+2.40
+2.83
+2.13
+4.48
+4.54
+3.46
+2.07
+2.83
+0.80
+3.92
+4.56
+1.02
+9.60
+4.95
+2.81
+2.50
+5.31
+0.70
+0.78
+5.21
+3.73
+3.31
+4.18
+4.49
+3.22
+4.70
+1.71
+1.69
+1.68
+2.46
+2.65
+2.29
+2.37
+3.99
+3.94
+4.61
+3.02
+4.17
+4.08
+4.57
+4.86
+5.13
+5.10
+4.15
+3.95
+5.15
+4.95
+4.77
+4.66
+16.83
+5.22
+5.47
+4.01
+5.36
+4.74
+5.89
+2.45
+1.16
+5.13
+23.10
+23.46
+31.15
+34.52
+44.81
+30.35
+47.55
+20.31
+11.99
+20.58
+34.14
+33.16
+26.68
+21.38
+13.06
+11.44
+11.11
+7.63
+3.86
+15.88
+10.42
+8.27
+17.16
+17.21
+16.99
+10.38
+14.10
+26.17
+10.93
+10.96
+3.79
+10.64
+13.49
+10.80
+5.39
+0.00
+0.56
+3.11
+1.99
+3.02
+39.12
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+0.00
+`;
+// Example file content (for testing):
+const fileContent = `Seaweed agar agar dried
+Seaweed kelp raw
+Salt bakers w added iodin
+Seaweed nori dried
+Salt fortified w iodine
+Haddock prepared in microwave oven no ingredients added
+Cod boiled
+Cod prepared in microwave oven no ingredients added
+Cod dried, salted, soaked, boiled
+Cod fillet fried/simmered
+Stockfish soaked
+Mussels pickled glass
+Cod raw
+Cod dried salted
+Pollock (Atlantic) boiled
+Milk skimmed dried
+Mussels raw
+Lobster boiled
+Soft/hard roe from fat bloater
+Mussels boiled
+Mussels fried in vegetable oil
+Egg powder chicken
+Fish fingers fried in sunflower oil
+Wolf fish prepared in microwave oven no ingredients added
+Coquilles scallop shell St. Jacques raw
+Mackerel steamed
+Milk whole dried
+Pollack (Atlantic) raw
+Fish fingers unprepared
+Whiting prepared in microwave oven no ingredients added
+Sushi stuffed w salmon and cucumber
+Dfr Modifast Intensive Pudding
+Dfr Modifast Intensive Milkshake
+Caviar
+Dfr Modifast Intensive Muesli
+Pollack (Atlantic) prep in microwave oven no ingredients added
+White fish fillet in batter deep-fried in vegetable oil
+Pollock (Alaska) steamed
+Fish lean <5 g fat average prepared in microwave oven no ingredients added
+Shrimps salted dried
+Coffee cappuccino instant powder
+Fish lean 0-5 g fat raw av
+Gluten free bread sourdough
+Milk condensed w sugar
+Pizza Turkish wo extras
+Egg yolk chicken raw
+Egg yolk chicken boiled
+Wheat bread brown Turkish
+Wheat bread white Turkish
+Wheat bread brown carbohydrate reduced
+Wheat bread roll white soft
+Multigrain bread brown w seeds fortified w iron and vitamins Vikorn Volvezel
+Multigrain bread brown w seeds fortified w iron and vitamins Vikorn Vitaminebrood
+Wheat baguette white
+Sprat fillet smoked
+Wheat bread wholemeal fortified w vit D and fibre Vollerkoren
+Eel raw
+Oysters
+Wheat corn bread white
+Wheat ciabatta white no filling
+Wheat bread white milk based
+Wheat bread white av milk/water based
+Wheat bread white water based
+Wheat bread white pita
+Crab in water tinned
+Multigrain bread white w seeds
+Multigrain bread av white and brown w seeds
+Brioche
+Multigrain bread brown w seeds
+Salmon tinned
+Spawn/hard roe coloured glass
+Soft/hard roe fried
+Wheat bread roll white hard
+Wheat bread brown
+Wheat baguette brown
+Wheat bread av brown and wholemeal 
+Wheat bread wholemeal coarse
+Wheat bread wholemeal av fine and coarse
+Wheat bread wholemeal fine
+Wheat malt bread brown
+Wheat bread roll brown hard
+Mackerel raw
+Wheat bread roll brown soft
+Wheat currant bun white
+Wheat bread white Tijger
+Pollock (Alaska) raw
+Multigrain roll brown hard
+Multigrain roll brown soft
+Anchovy raw
+Shrimps Dutch boiled
+Wheat sourdough bread wholemeal
+Wheat bread brown Tijger
+Wheat rye bread wholemeal
+Wheat corn bread white w sunflower seeds
+Wheat bread white av milk/water based w sunflower seeds
+Wheat bread roll wholemeal soft
+Wheat bread wholemeal Tijger
+Wheat corn bread white w seeds
+Wheat bread white av milk/water based w seeds
+Multigrain bread av white and brown w seeds w extra linseed
+Wheat sugar bread white
+Wheat bread av brown and wholemeal w sunflower seeds
+Wheat bread brown w sunflower seeds
+Wheat baguette white w herb butter ready made
+Wheat currant bread white
+Stollen w almond/imitat paste wo nuts
+Wheat bread brown w seeds
+Gluten free bread multiseeds
+Rye wheat bread brown
+Wheat bread wholemeal coarse w sunflower seeds
+Wheat bread wholemeal av fine and coarse w sunflower seeds
+Wheat bread wholemeal fine w sunflower seeds
+Wheat bread brown w pumpkin seeds
+Wheat bread currant/raisin white av
+Wheat bread av brown and wholemeal w seeds
+Wheat bread av brown and wholemeal w pumpkin seeds
+Fish cuisine pollock w breadcrumbs and herbs prepared
+Wheat bread wholemeal coarse w seeds
+Wheat bread wholemeal av fine and coarse w seeds
+Wheat bread wholemeal fine w seeds
+Wheat raisin bread white
+Wheat bread wholemeal coarse w pumpkin seeds
+Wheat bread wholemeal av fine and coarse w pumpkin seeds
+Wheat bread wholemeal fine w pumpkin seeds
+Mackerel fillet smoked
+Gluten free bread light
+Stollen w almond/imitat paste av w and wo nuts
+Mackerel in water tinned
+Yeast extract Marmite
+Wheat nut bread wholemeal 
+Wheat muesli bun brown/wholemeal
+Seafood cooked
+Wheat muesli bread brown/wholemeal
+Stollen w almond/imitat paste w nuts
+Coffee wiener melange instant powder
+Gluten free bread dark
+Wheat currant bread wholemeal
+Anchovy in oil canned
+Wheat baguette white w cheese and onion
+Mackerel in oil tinned
+Cracker VitaLU
+Salt not fortified w iodine
+Rye bread wholemeal/rye wheat bread brown av
+Rye bread wholemeal
+Fish fat >5 g fat raw av
+Salt sea
+Wheat currant bread white w almond paste
+Wheat bread currant/raisin white av w almond paste
+Wheat raisin bread white w almond paste
+Egg whole chicken corn-fed boiled
+Mackerel prepared in microwave oven no ingredients added
+Cheese Emmenthaler
+Cheese Gruyere
+Cheese Roquefort
+Cheese Stilton
+Cheese Swiss dried
+Cheese Cheddar
+Toasted ham-cheese sandwich w white bread
+Toasted ham-cheese sandwich w brown/wholemeal bread
+Plaice boiled
+Cheese Parmesan
+Egg whole chicken av boiled
+Roll white hard w cheese, ham, egg and vegetables
+Egg whole chicken free-range boiled
+Egg whole chicken fried in margarine
+Plaice prepared in microwave oven no ingredients added
+Egg whole chicken corn-fed raw
+Cheese Saint Paulin/Port Salut
+Cheese Bel Paese
+Egg whole chicken organic boiled
+Bun w vanilla custard
+Chocolate bar filled Kinder
+French toast made w white wheat bread
+Sardines grilled
+Herring pickled (sweet)sour
+Egg whole chicken free-range raw
+Cracker VitaLU fortified w calcium
+Egg whole chicken av raw
+Plaice fillet fried/simmered
+Plaice raw
+Plaice fried
+Flounder prepared in microwave oven no ingredients added
+Cheese fondue homemade
+Omelette/scrambled eggs
+Halibut smoked
+Tuna raw
+Flan bottom Limburg
+Cheese sheep/goat Turkish 50+ canned
+Schar/tongschar bereid in magnetron z toev
+Quark low fat w fruit
+Cheeseburger ready-to-eat
+Herring raw
+Mascarpone cheese
+Herring salted
+Salad egg
+Bread stuffed Bapao meat
+Quark low fat
+Quark low fat lactose-free
+Herring pickled w gherkin
+Cheese 20+ low sodium
+Omelette w ham and cheese
+Rainbow trout prepared in microwave oven no ingredients added
+Kippers steamed
+Kipper smoked
+Sole raw
+Cheese sheep fresh
+Coffee creamer full fat
+Coffee creamer half fat
+Coffee creamer low fat
+Coffee creamer Becel
+Cheese 20+ Leidse w cumin/Fries clove
+Salmon farmed raw
+Drink soya Groeidrink 1-3+ Alpro
+Quark half fat
+Sardines/pilchards in oil tinned
+Cheese 30+ age 10-12 mths
+Cheese 20+
+Cheese 10+
+Lemon sole raw
+Fatless sponge
+Sauce carbonara homemade
+Bloater fried
+Egg whole chicken organic raw
+Cheese 30+ age 4-7 mths
+Cheese 30+ av
+Cheese 30+ age 4-8 weeks
+Cheeseprod w veg fat Kees oud
+Flan filled w rice pudding
+Ice cream dairy vanilla flavoured
+Toddler formula Nestle groeimelk 2+ p 100 ml
+Toddler formula Nestle groeimelk 1+ p 100 ml
+Cheese Gouda 48+ age 10-12 mths
+Cheese Old Amsterdam 48+
+Cheese Gouda 48+ av
+Cheese Gouda 48+ age 4-7 mths
+Cheese Gouda 48+ age 8 wk-4 mths
+Cheese Gouda 48+ age 4-8 weeks
+Cheese 40+ low sodium
+Cheese 30+ age 8 wk-4 mths
+Cheeseproduct w veg fat Kees jong belegen
+Quark full fat
+Cheese w cumin 48+ average
+Ice cream dairy av
+Sponge cake wholemeal/multigrain
+Toddler formula Nutrilon 4 p 100 ml
+Toddler formula Nutrilon 5 p 100 ml
+Toddler formula Kruidvat 5 p 100 ml
+Cheese Dutch in Swiss-style 45+
+Cheese Brie 60+
+Cheese 35+
+Baklava nut-honey cake
+Cheese Camembert 45+
+Cheese Camembert 30+
+Chocolate milk sugar-free
+Chocolate milk
+Squid prepared in microwave oven no ingredients added
+Squid raw
+Mousse chocolate home-made
+Ice cream dairy stracciatella
+Bacon lean smoked prepared
+Biscuit sponge fingers
+Ice cream dairy w vegetal fat vanilla flavoured
+Spiced cake Indonesian- Spekkoek
+Chocolate milk w hazelnuts wo sugar
+Quark w fruit Danoontje
+Cheese 48+ low sodium
+Cheese 40+ Leiden w cumin/Fries clove
+Squid rings deep-fried in vegetable oil
+Ice cream dairy w chocolate coating
+Eclair wo filling
+Toddler formula Nestle Little steps 3 p 100ml
+Bacon lean smoked raw
+Ice cream dairy w caramel and nuts
+Mousse chocolate ready-made
+Herring fillet in tomato sauce tinned
+Toddler formula Nutrilon 6 p 100 ml
+Sausage frankfurter tinned
+Sausage beef frankfurter type tinned
+Sausage frankfurter lean tinned
+Cheese raw milk 48+
+Cheese 45+
+Cheese Edam 40+
+Cheese Mozzarella made from cow's milk
+Cheese white 45+ feta-like from cow's milk
+Chocolate milk w puffed rice
+Yoghurt goatmilk full fat
+Skyr skimmed plain
+Chocolate milk w hazelnuts
+Ice cream dairy w fruit
+Cream slice Dutch Tompouce
+Toddler formula Hero Baby Nutrasense Standaard 2 p 100 ml
+Doughnut plain
+Salad crab
+Chocolate sprinkles milk
+Chocolate flakes milk
+Chocolate flakes mix white and milk
+Chocolate flakes white
+Chocolate sprinkles white
+Cake made w butter
+Ice cream dairy/non dairy cornet w chocolate and nuts
+Cake plain av
+Chocolate milk w raisins
+Cake wo butter
+Cake madeleine cake bars Lotus
+Chocolate sprinkles mix white and milk
+Sole prepared in microwave oven no ingredients added
+Flan w custard and crumble topping
+Cheese 50+
+Cheese Brie 50+
+Ice cream chocolate
+Potato puree powder w milkpowder w fat
+Omelette w potatoes Spanish tortilla
+Skyr skimmed w fruit
+Porridge Nestle Pyjamapapje ready made
+Hamburger (with roll) vegetables and sauce homemade
+Blancmange vanilla
+Cake Dutch spiced ontbijtkoek w chocolate
+Doughnut iced
+Cake marble-
+Wafer galette
+Toddler formula Hipp Biologisch Combiotik 3 p 100 ml
+Infant formula Hipp Biologisch Combiotik 1 p 100 ml
+Toddler formula Hipp Biologisch Combiotik 2 p 100 ml
+Kidney ox raw
+Cheese Limburger
+Cheese smoked 45+
+Cake Dutch spiced Ontbijtkoek wholemeal
+Cake Dutch spiced Ontbijtkoek less sugar
+Cake Dutch spiced Ontbijtkoek
+Cake Dutch spiced Ontbijtkoek wo sugar
+Cake Dutch spiced Ontbijtkoek fortified w fibre
+Yoghurt Turkish 4% fat
+Biscuit Dutch Taai-taai
+Fudge/caramel soft
+Wafer w milk & hazelnuts Knoppers
+Yoghurt Bulgarian whole milk
+Yoghurt full fat plain Activia
+Yoghurt full fat
+Milk semi-skimmed fortified w calcium and vit D
+Milk raw
+Milk whole
+Milk whole lactose free
+Milk semi-skimmed
+Kefir
+Yoghurt half fat
+Milk semi-skimmed fortified w calcium
+Milk semi-skimmed lactose free
+Yoghurt semi-skimmed lactose free
+Buttermilk
+Milk skimmed
+Yoghurt low fat
+Yogurt Greek skimmed
+Cake w Dutch Amaretti Bitterkoekjes
+Cake chocolate made w butter
+Potatoes mashed instant prep w s-sk milk
+Quiche Lorraine
+Cream cooking light
+Sauce w semi-skimmed milk and cornflour
+Cake chocolate made wo butter
+Cake chocolate av
+Cream custard
+Potato puree powder av
+Ice cream yoghurt based w fruit
+Cake raisins-
+Toddler formula Nestle Little steps 2 p 100ml
+Infant formula Nestle Little steps 1 p 100ml
+Quark low fat w fruit/vanilla w sweetener
+Yoghurt low fat w fruit
+Tuna in oil tinned
+Toddler formula Kruidvat 4 p 100 ml
+Toddler formula Bonbebe Standaard 4 p 100 ml
+Toddler formula Kruidvat Standaard 3 p 100 ml
+Toddler formula Bonbebe Standaard 3 p 100 ml
+Toddler formula Kruidvat Standaard 2 p 100 ml
+Corned beef
+Yoghurt Turkish 10% fat
+Shrimps in water tinned
+Custard soft & airy 
+Buttermilk w fruit
+Dairy drink Campina Fruitmelk
+Yoghurt Greek full fat
+Porridge milk w wheat flour white Lammetjespap
+Toddler formula Jumbo Standaard 5 p 100 ml
+Eclair w whipped cream filling
+Eclair cheese cream filled
+Yoghurt drink Actimel plain
+Omelette w potatoes, vegetables and bacon Spanish tortilla
+Cake Dutch spiced Ontbijtkoek w raisin
+Milk chocolate-flavoured w s-sk milk and sweetened cocoa powder
+Cake w nuts
+Toddler formula Jumbo Standaard 3 p 100 ml
+Fish fatty >5 g fat prepared in microwave oven no ingredients added
+Processed meat prod 10-20 g fat excl liver av
+Cake Dutch spiced Ontbijtkoek w nuts
+Toddler formula Jumbo Standaard 2 p 100 ml
+Milk chocolate-flavoured semi-skimmed
+Milk chocolate-flavoured semi-skimmed w sweetner
+Peanuts milkchocolate coated
+Porridge oatmeal prepared w whole milk unsweetened
+Porridge oatmeal prepared w semi-skimmed milk unsweetened
+Milk chocolate-flavoured full fat
+Milk chocolate-flavoured low fat
+Pancake w cheese homemade
+Pastry puff cheese filled frozen unprepared
+Quark full fat w fruit
+Creme fraiche half fat
+Toddler formula Jumbo Standaard 4 p 100 ml
+Yoghurt half fat w fruit
+Salmon smoked
+Toddler formula Nutrilon 2 p 100 ml
+Toddler formula Nutrilon 3 p 100 ml
+Toddler formula Bonbebe Standaard 2 p 100 ml
+Yoghurt drink Actimel fruit
+Yoghurt drink Vifit fruit
+Breakfast drink Goede Morgen Vifit
+Cheese Kernhem 60+
+Cheese spread 20+
+Quark half fat w fruit
+Porridge buttermilk w wheat flour white
+Porrdige buttermilk groats
+Prawns cooked
+M&M's chocolate
+Chocolate eclair w whipped cream filling
+Quiche w vegetables/cheese/egg
+Cake Dutch spiced Ontbijtkoek w rockcandy
+Topping dessert w sugar whipped KlopKlop
+Blancmange home-made w semi-sk milk
+Foe jung hai filled omelet wo rice
+Cake Dutch spiced Ontbijtkoek w ginger
+Yoghurt 0% fat w fruit Activia
+Yoghurt low fat w fruit/vanilla w sweetener
+Chocolate flakes av
+Yoghurt stracciatella full fat 
+Cake Dutch spiced Ontbijtkoek w nuts & fruit
+Potato puree powder wo milkpowder wo fat
+Yoghurt drink Activia
+Yoghurt drink
+Yoghurt drink w sweetener
+Yoghurt drink Fristi w sweetener
+Yoghurt drink 7-9g CHO
+Yoghurt drink fortified w calcium
+Yoghurt drink Becel pro-activ
+Yoghurt drink w sweetener Linessa
+Coffee creamer
+Cream cooking
+Cream sour
+Ice cream dairy w fruitcoating
+Yoghurt vanilla half fat
+Spice biscuit sprinkles Bolletje
+Tarts filled w jam
+Waffle penny-
+Infant formula Jumbo Standaard 1 p 100 ml
+Pastry puff cheese filled deep-fried in liquid fat
+Yoghurt snack Breaker
+Blancmange chocolate
+Yoghurt full fat w fruit
+Yoghurt full fat w fruit/vanilla Activia
+Infant formula Nutrilon 1 p 100 ml
+Infant formula Kruidvat Standaard 1 p 100 ml
+Infant formula Bonbebe Standaard 1 p 100 ml
+Tuna in water tinned
+Beef shank prepared
+Veal shank prepared
+Cheese Bluefort
+Cheese Gorgonzola
+Cheese Turkish 60+ cow's milk canned
+Cheese spread 15+ Balans ERU
+Custard of milk and whipped cream
+Porridge rice
+Porridge semolina
+Dessert made of custard, yoghurt & syrup
+Ice cream dairy/non-dairy cornet w fruit
+Tart w bread base w veg/egg/cheese
+Cake butter Dutch Boterkoek
+Dish w veg and meat Moksi-alesi Surinam
+Eclair filled w banana and whipped cream
+Pancake wholemeal homemade prepared w margarin
+Pancake homemade prepared w margarin
+Pancake wholemeal homemade prepared w liquid margarin
+Pancake homemade preprared w liquid margarin
+Gehaktbal hoh m ei gebakken
+Coffee iced
+Coffee latte macchiato freshly made
+Minced beef ball prepared w egg/crumbs
+Gateau w butter-cream filling
+Pudding airy
+Toddler formula Albert Heijn Standaard 4 p 100 ml
+Toddler formula Etos Standaard 4 p 100 ml
+Toddler formula Albert Heijn Biologisch Standaard 3 p 100 ml
+Toddler formula Etos Biologisch Standaard 3 p 100 ml
+Beef roast raw
+Beef tenderloin steak raw
+Beef salted cooked
+Advocaat liqueur
+Cake apple made w butter
+Beef salted dried seasoned Pastirma Turkish
+Cheese spread 40+
+Cheese spread Kids ERU
+Chocolate chip cookie
+Raisins coated w milkchocolate
+Crispbread Sandwich Wasa
+Cake apple av
+Tiramisu
+Cake apple- wo butter
+Tzatziki
+Milkshake w fresh fruit
+Puff pastry filled w almond paste
+Flan w custard and fruit
+Custard several flavours full fat
+Custard 2 flavours w syrup vlaflip Campina
+Sauce cheese- based on roux prepared
+Cup cake iced
+Cheese Danish Blue
+Creme fraiche
+Chocolate filled w caramel Rolo
+Dairy dessert w cream
+Custard vanilla full fat
+Custard half fat all flavours
+Custard no fat w sweetener
+Shortbread
+Biscuit Dutch Jodekoek
+Processed meat products 10-20 g fat av
+Biscuit w nuts and chocolate
+Pancake w apple and raisin homemade
+Eel smoked
+Toddler formula Albert Heijn Standaard 3 p 100 ml
+Toddler formula Etos Standaard 3 p 100 ml
+Infant formula Hero Baby Nutrasense Standaard 1 p 100 ml
+Infant formula Hero Baby Standaard 1 p 100 ml
+Veal olive prepared
+Biscuit Dutch Frou frou
+Beef shank raw
+Veal shank raw
+Surimi
+Lamb saddle raw
+Seitan
+Biscuit spiced small Kruidnoten w milk choc
+Asparagus green boiled
+Garlic cooked wo fat
+Onion red raw
+Onion red boiled
+Yeast dried
+Minced beef ball prepared wo egg
+Cream whipping unprepared
+Cream whipped w sugar canned
+Cream whipped low fat w sugar canned
+Chocolate sprinkles mix white and dark
+Chocolate flakes mix white and dark
+Custard chocolate full fat
+Toddler formula Albert Heijn Biologisch Standaard 2 p 100 ml
+Toddler formula Etos Biologisch Standaard 2 p 100 ml
+Salad egg w potato
+Toddler formula Hero Baby Standaard 3 p 100 ml
+Flan w fruit filling
+Yoghurt cream- w fruit
+Toddler formula Albert Heijn Standaard 2 p 100 ml
+Toddler formula Etos Standaard 2 p 100 ml
+Biscuit syrup w chocolate
+Biscuit spiced Speculaas w almond paste
+Toddler formula Hero Baby Nutrasense 3 p 100 ml
+Gateau w whipped cream
+Yogurt drink Ayran Turkish
+Brownie wo filling
+Infant formula Albert Heijn Biologisch Standaard 1 p 100 ml
+Infant formula Etos Biologisch Standaard 1 p 100 ml
+Saus op basis groentenat/melk bereid z vet
+Infant formula Albert Heijn Standaard 1 p 100 ml
+Infant formula Etos Standaard 1 p 100 ml
+Beef roast prepared
+Roastbeef
+Cheese spread 45+
+Doughnut Dutch style plain
+Gammon boiled deboned
+Pork rolled (processed meat product)
+Beef smoke-dried lightly salted
+Beef smoke-dried
+Cheese spread 48+ full fat
+Potatoes mashed instant prepared average
+Blancmange raspberry w red currant sauce
+Blancmange vanilla w strawberry sauce
+Hot chocolate from vending machine
+Beef salted raw Surinam
+Flan apple and crumble topping
+Toddler formula Hero Baby 4 p 100 ml
+Toddler formula Hero Baby 5 p 100 ml
+Chocolate sprinkles av
+Toddler formula Hero Baby Standaard 2 p 100 ml
+Flan fruit and crumble topping
+Chocolate cake w whipped cream
+Sauce based on roux prepared
+Brownie w nuts
+Cream whipped w added sugar
+Prawn crackers natural
+Gateau fatless sponge w fruit & cream
+Berliner pastry
+Candybar KitKat
+Trout prepared in microwave oven no ingredients added
+Salmon farmed prep in microwave oven no ingredients added
+Waffle Luikse
+Bacon lean prepared
+Pork spare rib raw
+Chicken drumstick w skin raw
+Chicken (processed meat product)
+Chicken fillet prepared
+Ham lean grilled
+Cheese fresh light 8% fat
+Cheese cottage
+Blancmange semolina w red currant sauce
+Pheasant whole raw
+Chicken schnitzel breaded raw
+Doughnut Dutch style filled w currants and raisins
+Coffee cappuccino instant prepared
+Salad fish
+Coffee cappuccino freshly made
+Toddler formula Hero Baby Nutrasense 4 p 100 ml
+Cake sponge Dutch Eierkoek
+Rice cakes puffed w chocolate
+Sponge cake w fruit
+Salad shrimp
+M&M's chocolate w peanuts
+Tart fruit w shortbread base
+Wine red
+Wine medicinal pleegzusterbloedwijn
+Waffle Luikse w chocolate
+Cheesecake
+Gateau fatless sponge w marzipan
+Pork >19% fat prepared av
+Pasta dish carbonara homemade
+Chocolate filled w peanuts
+Liver pork boiled (processed meat product)
+Bacon fat smoked prepared
+Liver pork raw
+Kidney pork raw
+Bacon smoked Katenspek
+Bacon rasher streaky
+Pork steak/chop prepared
+Cheese cream soft Paturain
+Bacon
+Lamb chop raw
+Lamb shoulder prepared
+Cheese Rambol
+Chicken w skin prepared
+Liver ox raw
+Waffle soft-/sugar-/flash-
+Risotto prepared
+Salad nicoise w fish and dressing
+Salad salmon
+Candybar Mars
+Candybar Milky Way
+Liver pork prepared
+Candybar Nuts
+Biscuit w chocolate
+Liver ox prepared
+Liver ox boiled (processed meat product)
+Lamb >10 g fat raw av
+Salad cheese
+Biscuit w chocolate layer Scholiertje
+Endive boiled
+Endive raw
+Apple strudel
+Apple pie Dutch w shortbread average
+Sausage smoked lean cooked
+Sausage smoked beef cooked
+Pizza quattro formaggi
+Milk human
+Appel pie Dutch w shortbread w butter
+Endive frozen unprepared
+Apple pie Dutch w shortbread wo butter
+Tuna w vegetables and tomato sauce canned
+Pancake bacon chilled
+Candybar Bounty
+Sausage veal Braadworst raw
+Candybar av
+Bacon rasher streaky grilled
+Milk based drink Yakult Balance
+Chicken wo skin grilled
+Turkey raw
+Turkey (processed meat product)
+Minced lamb raw
+Chicken nuggets prepared in frying fat
+Chicken nuggets prepared in oven
+Chicken rolled raw
+Chicken wo skin raw
+Cheese cream soft Mon Chou
+Cheese cream w herbs 25-30 g fat
+Onions fried in vegetable oil
+Mutton >10g fat raw av
+Lamb <10 g fat raw av
+Lamb chop prepared
+Lamb saddle prepared
+Chinese noodle ball frozen unprepared
+Dairy spread plain/herbs light
+Mutton <10g fat raw av
+Pangasius bereid in magnetron z toev
+Beans soya dried
+Cheese spread 60+ Kiri
+Turkey fillet raw
+Greek salad wo dressing
+Beans broad frozen unprepared
+Beans broad tinned
+Gelatin
+Milk based drink Yakult original
+Milkbased drink Yakult Plus
+Chicken burger breaded prepared
+Chicken wo skin prepared
+Chicken rolled prepared
+Cake Dutch w icing & cream Oranjekoek
+Danish pastry
+Sausage veal Braadworst prepared
+Candybar Twix
+Candybar Lion
+Endive raw w mashed potatoes, minced meat ball and bacon
+Almonds w skin unsalted
+Almonds w skin salted
+Peanutsauce homemade w s-sk milk wo fat
+Potatoes mashed fresh prep w s-sk milk wo fat
+Pork >15% fat raw av
+Pizza w fish frozen unprepared
+Fried rice Nasi goreng w egg
+Potatoes mashed fresh prep w whole milk and margarin
+Potatoes mashed fresh prep w semi-skimmed milk and margarin
+Hazelnuts unsalted
+Okra boiled
+Okra raw
+Yoghurt full fat w cereal/muesli Activia
+Fennel boiled
+Pie apple-nuts
+Pork filled w ham and cheese raw
+Pizza w cheese and vegetables frozen unprepared
+Minced meat w ham and cheese raw
+Processed meat prod excl liver av
+Pizza w mozzarella Margherita
+Coffee wiener melange instant prepared
+Sausage smoked cooked av
+Carrot cake
+Processed meat prod <10 g fat excl liver av
+Biscuit spiced small Kruidnoten w chocolate av
+Processed meat products av
+Beef rolled prepared
+Processed meat products <10 g fat av
+Fritter apple
+Pork spare rib prepared
+Sausage smoked pork cooked
+Black pudding
+Pork tenderloin medaillon prepared
+Cheese cream soft Boursin
+Minced mutton prepared Kofte Turkish
+Minced lamb prepared
+Chicken for soup w skin raw
+Chicken w skin raw
+Sausage grill chicken
+Mince chicken raw
+Pork fricandeau part of leg raw
+Chocolate white
+Cheese goat fresh
+Sunflower seeds
+Sesame seeds
+Crisps tortilla several flavours
+Crisps tortilla unflavoured
+Fritter banana
+Chocolate spread white
+Millet raw
+Candybar Snickers
+Rice brown boiled
+Rice white boiled
+Rice white parboiled boiled
+Fennel raw
+Mayonnaise product approx 35% oil
+Pesto green
+Nuts cake
+Sausage grill w cheese
+Chicken schnitzel breaded w corn flakes raw
+Minced meat ball pork raw w egg and breadcrumbs
+Spread duo wo chocolate
+Rye flakes rolled
+Flour rye
+Flour rye 60% extraction
+Banana bread
+Minced meat ball beef/pork raw w egg/brcrumbs
+Meatball Berenklauw unprepared
+Baked chicory w cheese and ham
+Cocktail snacks based on corn Organix Goodies
+Olives ripe in brine tinned/glass
+Rice brown raw
+Rice multi-grain raw
+Purslane boiled
+Cocktail snacks based on corn or wheat
+Processed meat products low sodium
+Veal stewing steak prepared
+Pizza w meat frozen unprepared
+Kidney lamb raw
+Rice white boiled w candied fruit, nuts and seeds
+Liver calf's prepared
+Beef rib steak prepared
+Liver calf's raw
+Almond paste w egg
+Pizza salami frozen unprepared
+Endive raw w mashed potatoes wo meat prepared
+Burrito w minced meat
+Biscuit av
+Minced veal shallow fried
+Salami
+Biscuit Jaffa cakes/Cake PiM's
+Sausage dry sucuk Turkish
+Sausage dry salam Turkish
+Biscuit Dutch shortbread sprits w choc
+Tilapia raw
+Beef >10% fat prepared av
+Minced beef ball raw w egg and breadcrumbs
+Meat av raw >5% fat excl liver
+Beef stewing steak prepared
+Beef sirloin rolled raw
+Veal stewing meat raw
+Cake wrapped in marzipan and chocolate
+Cassava cake Bojo Surinam
+Dairy spread plain/herbs
+Sandwich spread original
+Biscuits w nuts
+Sandwich spread other flavours
+Milk goats- full fat
+Cocktail snacks based on potatoes 
+Cocktail snacks based on potatoes Nibb-it
+Cocktail snacks Wokkels
+Crisps potato flavoured
+Crisps potato av
+Crisps potato unflavoured
+Crisps based on potato dough
+Crisps potato straws flavoured
+Crisps potato straws av
+Crisps potato straws natural
+Crisps potato Lays Sensations flavoured
+Crisps potato light flavoured
+Crisps potato light unflavoured
+Potato crisps oven baked
+Melon cantaloupe
+Snails
+Beans broad raw
+Purslane raw
+Beans broad boiled
+Minced veal raw
+Salami sausage saveloy lean
+Beef streaked/marbled prepared
+Biscuit Liga Belvita ontbijtbiscuits
+Biscuit brown/wholemeal
+Eel prepared in microwave oven no ingredients added
+Paling zee- bereid in magnetron z toev
+Minced beef lean shallow fried
+Veal prime rib prepared
+Biscuit peanut
+Sweet pepper stuffed w cream cheese
+Cheese pastry w puff pastry
+Pizza w ham and pineapple frozen unprep
+Ocean perch prepared in microwave oven no ingredients added
+Processed meat prod 20-30 g fat excl liver av
+Veal fricandeau prepared
+Veal >5% fat raw av
+Veal olive raw
+Beef breast boneless prepared
+Sweet pepper stuffed w minced meat
+Sauce tomato ready made jar
+Veal stewing meat prepared
+Beef <5% fat raw av
+Salad cucumber
+Breakfast cereal Spec K choc Kellogg's
+Veal prime rib raw
+Kale curly w marhed potatoes, smoked sausage and bacon
+Pesto red
+Nut paste mixed nuts unsalted
+Veal fricandeau raw
+Meatball Berenklauw deep-fried in liquid fat
+Spaghetti bolgonese w cheese homemade
+Potatoes mashed instant prepared w water
+Wine white dry
+Wine white sweet
+Sausage beef Braadworst raw
+Processed meat products 20-30 g fat av
+Minced meat raw av
+Pork av raw
+Cheesecake made w cream cheese
+Minced beef lean raw
+Minced beef from butcher raw
+Veal av raw
+Veal stewing steak raw
+Tortellini boiled
+Chocolate dark w hazelnuts
+Sweetcorn boiled
+Sweetcorn tinned
+Liqueur w cream 15-25 vol% alcohol
+Mushrooms chanterelle raw
+Mushrooms chanterelle boiled
+Biscuit spiced small Kruidnoten w white choc
+Beef stewing meat prepared
+Meatloaf (processed meat product)
+Minced beef/pork shallow fried
+Processed meat prod >30 g fat excl liver av
+Pate spreadable lean
+Beef prime rib raw
+Beef stewing meat raw
+Minced pork raw
+Veal frying steak raw
+Veal schnitzel not breaded raw
+Sauce caramel for pudding
+Forcemeat balls for soup canned
+Sausage beef Braadworst prepared
+Beef prime rib prepared
+Salad salmon w potato
+Beef <10% fat prepared av
+Meat av raw excl liver
+Veal <5% fat raw av
+Lasagna bolognese ready to eat
+Casserol w tannia Pom Surinam
+Chicken sticks breaded frozen unprepared
+Pangasius raw
+Minced pork prepared
+Pork gammon steak prepared
+Processed meat products >30 g fat av
+Bacon rasher raw
+Sausage excl liver products av
+Minced beef/pork raw
+Pork fricandeau part of leg prepared
+Pork fricandeau fried (processed meat product)
+Sweetbread raw
+Veal frying steak prepared
+Biscuits & snacks cheesy
+Veal rib steak raw
+Pork gammon steak raw
+Pork tenderloin medaillon raw
+Viandel unprepared Mora
+Lamb shoulder raw
+Lamb leg prepared
+Rempejek peanut biscuit
+Chicken sticks breaded deep-fried in liquid fat
+Cream type product Blue Band Finesse voor koken
+Muesli bar w chocolate
+Spread sweet av
+Popcorn salted popped wo oil
+Protein bar w chocolate and sweetener
+Garlic raw
+Tomatoes tinned
+Tomato sieved pack
+Cucumber w skin raw
+Beans French boiled
+Beans French tinned
+Mushroom raw
+Onions raw
+Cucumber wo skin raw
+Peach w skin
+Beans French raw
+Beans French frozen boiled
+Cucumber boiled
+Pasta white w egg boiled
+Minced beef shallow fried
+Sausage incl liver products av
+Beef av raw
+Minced beef kofte Turkish prepared
+Beef rib steak raw
+Beef rump steak raw
+Veal schnitzel not breaded prepared
+Venison raw
+Butter product melange unsalted
+Butter product melange salted
+Salad meat w potato
+Sauerkraut w mashed potato wo meat prep
+Salad celeriac
+Nuts mixed unsalted
+Nuts mixed w cranberry unsalted
+Salad chicken satay
+Rice cakes w spices
+Salad tuna
+Pork shoarma seasoning prepared
+Beef >5% fat raw av
+Veal rib steak prepared
+Beef stewing steak raw
+Chicken fillet breaded raw
+Cheesespread Heks'n kaas
+Herb paste boemboe
+Potato waffles/balls frozen unprepared
+Cocoa powder
+Cocoa powder low fat
+Chervil fresh
+Egg white chicken raw
+Liver pate
+Beef steak tartare prepared
+Kromesky meat filled raw
+Beef ribeye steak prepared
+Pork shoarma seasoning raw
+Beef ribeye steak raw
+Sauce bolognese homemade
+Bobotie wo rice
+Mixed nuts and raisins
+Lasagna w vegetables ready-to-eat
+Spinach creamed frozen boiled
+Gnocchi cooked
+Gnocchi unprepared
+Vegetables mixed carrot-onion raw
+Fondant cream
+Kromesky meat filled prepared
+Beef salted cooked Surinam
+Beef steak tartare raw
+Goulash
+Beef streaked/marbled raw
+Sauce bolognese ready made jar
+Biscuits assorted w butter av
+Irish coffee
+Vegetables for stir-frying mushroom raw
+Cocoa powder sweetened Nesquik
+Liver pate/Berliner liver sausage
+Pate
+Sausage dried metworst
+Salami sausage saveloy
+Sausage Chorizo
+Liver pate sausage
+Liver sausage
+Liver sausage coarse hausmacher
+Beef steak tartare spiced filet americain
+Beef rib prepared
+Minced beef raw
+Beef olives raw
+Sausage smoked pork traditional cooked
+Hamburger raw
+Beef rump steak prepared
+Beef rib raw
+Ham smoked raw
+Beef breast boneless raw
+Sausage raw beef
+Chicken fillet in batter raw
+Aioli
+Mayonnaise
+Sauce garlic 30-<40% oil
+Sauce for chips 25% oil
+Sauce Joppie
+Tofu unprepared
+Ham shoulder medium fat boiled
+Ham lean boiled
+Pork side cured and smoked
+Walnuts salted
+Walnuts unsalted
+Brazil nuts unsalted
+Brazil nuts salted
+Almonds blanched unsalted
+Almonds blanched salted
+Pistachio nuts salted
+Pistachio nuts unsalted
+Nuts mixed salted
+Peanuts salted
+Peanuts unsalted
+Peanut butter 100% peanuts wo salt
+Peanuts dry roasted
+Tofu pieces/chunks seasoned unprepared
+Cashew nuts unsalted
+Cashew nuts salted
+Spread chocolate dark
+Spread speculaas flavoured
+Spread duo w chocolate
+Spread chocolate hazelnut
+Spread chocolate milk
+Salad dish w chicken, pasta and dressing
+Tempeh unprepared
+Chocolate extra dark
+Chocolate dark
+Chocolate dark sugar-free
+Cheese goat hard
+Chocolate sprinkles extra dark
+Chocolate sprinkles dark
+Coffee creamer powder
+Chocolate flakes dark
+Salsify raw
+After eight chocolate mints
+Tomato cherry raw
+Tomatoes classic round boiled
+Tomato av boiled
+Orange
+Tomato av raw
+Bakery mix for chocolate cake
+Tomato vine raw
+Tomato beef raw
+Tomato beef boiled
+Tomatoes classic round raw
+Onion Welsh raw
+Leek boiled
+Carrot bunched raw
+Carrot winter boiled
+Carrot raw av
+Carrot boiled av
+Carrot winter raw
+Onion Welsh boiled
+Carrot bunched boiled
+Pear w skin
+Potatoes Red Baron wo skin boiled
+Potatoes waxy av wo skin boiled
+Grapes white w skin
+Potato product natural precooked chilled
+Potato product seasoned precooked chilled
+Potatoes Nicola wo skin boiled
+Apple Elstar w skin
+Lettuce butterhead raw
+Apple w skin av
+Carrot tinned
+Cocoa powder sweetened
+Potatoes wo skin boiled av
+Apple Elstar wo skin
+Apple Jonagold w skin
+Fruit snack Knijpfruit/Slurpfruit
+Leek raw
+Apple wo skin av
+Grapes w skin av
+Pear wo skin
+Lettuce red raw
+Apple Jonagold wo skin
+Cocoa product powder Ovomaltine
+Potatoes floury av wo skin boiled
+Cauliflower boiled
+Potatoes Eigenheimer wo skin boiled
+Banana
+Grapes black w skin
+Cauliflower raw
+Potatoes raw
+Potatoes new raw
+Potatoes old raw
+Plantain ripe raw
+Breakfast cereal Honey pops Loops Kellogg's
+Sausage tongue
+Beef olives prepared
+Liver chicken raw
+Beef T-bone steak prepared
+Hamburger prepared
+Scrapple, pork
+Beef frying steak raw
+Veal tenderloin medaillon raw
+French fries w shoarma, cheese and sauce
+Potatoes fried
+Brown beans w rice Surinam
+Chips oven frozen prepared in oven
+Wheat bran
+Potatoes slices/parts frozen unprepared
+Potatoes slices/parts frozen w spices unprepared
+Chips pre-fried frozen unprepared
+Breakfast cereal All-Bran Plus Kellogg's
+Guacamole
+Breakfast cereal porridge Olvarit 8 granen 12+ months
+Breakfast cereal Special K Original Kellogg's
+Vegetables mixture raw av
+Vegetables av raw
+Cereal bar Special K Kellogg's
+Sausage grill
+Sausage luncheon meat
+Sausage w smoked bacon-bits
+Luncheon meat tinned
+Snack sausage roll puff pastry
+Beef tongue raw
+Tongue calf's raw
+Sausage luncheon meat lean
+Popcorn salted popped w oil
+Vegetable mix for soup raw
+Vegetables for stir-frying Italian raw
+Courgettes raw
+Apple sauce wo sugar tinned
+Breakfast cereal Rice Krispies Kellogg's
+Breakfast cereal Coco pops Kellogg's
+Pork 10-19% fat prepared av
+Sausage cooked
+Sausage cooked lean
+Beef frying steak prepared
+Beef T-bone steak raw
+Salad meat
+Taco w minced meat and beans
+Salad chicken curry
+Kale curly w mashed potato wo meat prepared
+Breakfast cereal Chocoschelpjes G'woon
+Croissant ham and cheese
+Rice cakes puffed natural w (sea)salt
+Rice cake puffed plain wo salt
+Rice white raw
+Vegetables for stir-frying Dutch raw
+Courgettes boiled
+Tomato puree concentrated tinned
+Biscuit spiced small Kruidnoten w dark choc
+Brawn, pork pickled in vinegar
+Sausage pork Braadworst raw
+Spring roll deep-fried in vegetable oil
+Pork 5-14% fat raw av
+Veal tenderloin medaillon prepared
+Spring roll frozen unprepared
+Chicken cordon bleu raw
+Beans soya boiled
+Salsify boiled
+Legumes dish w vegetables in tomato sauce canned
+Rice multi-grain boiled
+Vegetables for stir-frying Mexican boiled
+Vegetables for stir-frying Mexican raw
+Gherkins pickled wo sugar
+Cabbage red w apple pieces home-made
+Gherkins sweet pickled
+Gherkins sour pickled
+Apple sauce wo sugar w sweetener tinned
+Sausage pork Braadworst prepared
+Bacon rasher prepared in own fat
+Pork shoulder raw
+Meringue cake Bokkenpootje
+Lamb leg raw
+Salad ham and leek
+Hotchpotch carrots/onions wo meat prepared
+Pecannuts oil roasted salted
+Pecan nuts unroasted unsalted
+Potato croquettes frozen unprepared
+Popcorn plain popped wo oil
+Croissant cheese
+Nuts macadamia salted
+Nuts macadamia unsalted
+Rice cakes puffed w caramel
+Millet boiled
+Corn cakes puffed plain w salt
+Coconut milk
+Peas and carrots tinned
+Cabbage oxheart raw
+Kale curly boiled
+Potato sweet raw
+Spinach boiled
+Raisins dried
+Vegetables for soup cooked
+Spinach tinned
+Vegetables av boiled
+Potato sweet boiled
+Yam raw
+Yam boiled
+Cabbage oxheart boiled
+Spinach raw
+Potatoes boiled w skin av
+Peas medium fine tinned
+Peas super fine tinned
+Broccoli raw
+Spinach frozen boiled
+Lettuce iceberg raw
+Sweet pepper pickled glass
+Spinach cut frozen unprepared
+Cabbage red glass
+Mustard leaves raw
+Cassava boiled
+Broccoli boiled
+Beans runner raw
+Beans runner frozen unprepared
+Cassava raw
+Cabbage Chinese raw
+Cabbage Chinese boiled
+Peas raw
+Celeriac boiled
+Turnip tops raw
+Turnip tops boiled
+Cabbage red raw
+Cabbage red boiled
+Cabbage white raw
+Cabbage white cooked
+Celeriac raw
+Peas frozen boiled
+Beans runner boiled
+Peas fresh boiled
+Vegetable mix for pea soup frozen unprep
+Ostrich, raw
+Breakfast cereal Smacks Kellogg's
+Waffle syrup wo butter
+Pork shoulder prepared
+Waffle syrup av
+Biscuit shortbread Bastogne
+Biscuit spiced Speculaas wo butter
+Biscuit spiced Speculaas av
+Biscuit Dutch shortbread sprits
+Biscuits sugar-free
+Rice white raw w candied fruit, nuts and seeds
+Wheat germ
+Crispbread Oerknack Bolletje
+Crispbread sesame
+Salad potato
+Toast Melba other varieties
+Crispbread gold-brown
+Crispbread high fibre
+Biscuit fruit fortified w fibre
+Crispbread av
+Pretzel sticks
+Biscuit children's av
+Crispbread Cracottes wholemeal
+Salad coleslaw
+Biscuit
+Crispbread wholemeal
+Crispbread light wholemeal
+Cracker mini unflavoured
+Biscuit spiced small Kruidnoten
+Crispbread light plain
+Biscuit spiced Speculaas w butter
+Waffle syrup w butter
+Biscuit w dried fruit & yoghurt Sultana Yofruit
+Cracker mini flavoured
+Breakfast cereal porridge Olvarit fijne granen 6+ months
+Breakfast cereal porridge Olvarit licht volkoren 8+ months
+Couscous wholemael unprepared
+Crispbread Cracottes naturel
+Breakfast cereal porridge Brinta
+Pasta wholemeal raw
+Biscuit fruit
+Toast Melba natural
+Flour wheat wholemeal
+Buckwheat groats
+Flour buckwheat
+Bakery mix for pancakes multigrain
+Breadsticks wholemeal
+Breakfast cereal Brinta Wake Up breakfastdrink
+Breadsticks
+Crispbread lightweight
+Flour wheat white
+Bakery mix for doughnuts Dutch style
+Bakery mix for pancakes
+Flour wheat self-raising
+Crackers Matzes
+Bakerymix for poffertjes
+Vegetables mixed carrot-onion boiled
+Vegetables for stir-frying Italian cooked
+Vegetables for stir-frying Dutch cooked
+Vegetables for stir-frying Oriental raw
+Smoothie fruit w dairy
+Biscuit baby/toddler Bolletje
+Breakfast cereal Coco pops Chocos Kellogg's
+Ragout w meat all types
+Roti w white flour and potato
+Binding agents av
+Bakery mix for apple pie
+Soup split pea w meat
+Cabbage red w apple pieces glass
+Fruit fresh av excl citrus
+Stewing pears cooked w sweetened liquid
+Breakfast cereal Choco chocos Plus
+Coconut flavoured cookies
+Biscuit Dutch Krakeling
+Wrap/tortilla wholemeal
+Breakfast cereal All-Bran flakes Kellogg's
+Rice cakes puffed w fruit flavour Organix
+Raisins soaked in water
+Fruit fresh av including citrus
+Vegetables for stir-frying oriental cooked
+Pork stewing meat prepared
+Pork shoulder chop prepared
+Meringue w butter-cream
+Butter cream
+Apple turnover w puff pastry w butter
+Apple turnover w puff pastry wo butter
+Seroendeng
+Apple turnover av
+Bakery mix for pancakes wholemeal
+Breakfast cereal Honey hoops Crownfield
+Ratatouille prepared wo meat
+Soup tomato w noodles
+Bami vegetables boiled
+Lettuce av raw
+Bami vegetables raw
+Vegetables mixed pickled Atjar tjampoer glass
+Cooking fat liq 97% fat <17g sat fa unsalted
+Cooking fat sol 97% fat >17g sat fa unsalted
+Margarine 80% fat <24 g sat fa unsalted
+Margarine liq 80% fat <17g sat fa unsalted
+Cooking fat liquid 97% fat <17 g sat fa salted
+Margarine liq 80% fat <17 g sat fa salted
+Margarine product liquid <60% fat <17 g sat fa unsalted
+Margarine product 45% fat <17g sat fa unsalted
+Low fat margarine prod Becel Omega3 Plus
+Low fat marg 40% fat <17 g sat fa unsalted
+Low fat spread Becel pro-activ
+Low fat margarine product Vita d'Or Goed begin
+Cooking fat solid 97% fat >17 g sat fa salted
+Low fat margarine prod Blue Band Idee
+Low fat margarine Jumbo
+Margarine product 60% fat >17 g sat fa salted
+Low fat margarine prod Bewust light 30% fat <10g sat fa unsalted
+Low fat margarine Blue Band
+Margarine 80% fat >24 g sat fa salted
+Margarine product liquid <60% fat <17 g sat fa salted
+Low fat marg prod Blue Band Goede Start
+Margarine 80% fat >24 g sat fa unsalted
+Low fat spead Becel pro-activ calorie light
+Low fat margarine 40% fat <17g sat fa fortified w vit E salted
+Low fat margarine Gouda's Glorie Lichtste Pondje
+Low fat margarine prod AH chol reducing
+Margarine product Becel Romig 60% fat
+Margarine product Albert Heijn Balans
+Low fat margarine Albert Heijn light
+Low fat spread AH omega-3
+Low fat margarine prod 35% fat <10 g sat fa unsalted
+Margarine product 60% fat <17 g sat fa unsalted
+Low fat margarine product Vita d'Or Bewust light
+Margarine product 60% fat <17g sat fa salted
+Low fat margarine Albert Heijn Goed Begin
+Low fat margarine Jumbo Goed Begin
+Low fat margarine product 20% fat <10g sat salted
+Low fat margarine 40% fat <17 g sat fa salted
+Cooking fat liq Vita d'Or vlees&jus
+Butter unsalted
+Butter salted
+Herb butter
+Pork schnitzel breaded raw
+Peanuts sugar coated
+Avocado
+Popcorn sweet popped wo oil
+Breakfast cereal honey loops 1 de Beste
+Biscuit spiced with candy mix
+Vegetables for stir-frying mushroom cooked
+Cider
+Soup thickened w meat (beef/chicken) and vegetables
+Shashlik skewer pork w vegetables prepared
+Meat-onion stew
+Soup clear w meat (beef/chicken) and vegetables
+Roti Surinam pancake
+Focaccia
+Chop-suey Indonesian wo rice
+Dough for pizza and savoury pie unprepared
+Wok sauce sweet and sour
+Manti stuffed pasta cooked Turkish
+Sauce chilli
+Peppers pickled canned/glass
+Kale curly raw
+Pork <10% fat prepared av
+Pork <5% fat raw av
+Chilli con carne bean dish
+Soup main course w legumes and meat
+Soup clear w meat (beef/chicken) vegetables and noodles
+Fruitbar w nuts
+Breakfast cereal All-Bran Fruit n Fibre Kellogg's
+Biscuit brown/digestive w chocolate
+Chinese noodle dish Bami goreng wo egg
+Breakfast cereal Choco moons Crownfield
+Wheat bread brown low sodium
+Kale curly frozen boiled
+Plant-based alternative to icecream based on coconut
+Sweets cream hard
+Artichoke hearts canned
+Kale curly glass
+Crispbread gluten free Fette Croccanti Schar
+Almond/imitation paste av
+Gravy 75% fat clear prep wo gravy instant powder
+Gravy 75% fat thickend prep wo gravy instant powder
+Duck w skin raw
+Pork chop prepared
+Pork sparerib prepared
+Pork shoulder chop raw
+Pork stewing meat raw
+Pork tenderloin raw
+Soup thickened w meat (beef/chicken)
+Soup clear w meat (beef/chicken) and noodles
+Soup clear w meat (beef/chicken)
+Tapenade tomato
+Nougat w chocolate
+Chips vegetable pre-fried frozen unprepared
+Muesli crunchy w nuts fortified w fibre
+Muesli crunchy w nuts
+Chocolate w liqueur
+Beans black eyed canned
+Aubergine/eggplant boiled
+Gravy 75% fat clear prep w gravy instant powder
+Gravy 75% fat thickend prep w gravy instant powder
+Pork tenderloin prepared
+Pork sparerib raw
+Pork schnitzel not breaded raw
+Biscuit Dutch Kletskop
+Deep fried legumes Bara Surinam
+Sauce Aardappel Anders av
+Muesli crunchy w nuts and chocolate
+Muesli crunchy w chocolate fortified w fibre
+Muesli crunchy w chocolate
+Biscuit Cafe noir
+Bakery mix for cake plain
+Fruit fresh citrus av
+Juice orange pasteurized
+Juice orange freshly squeezed
+Celery boiled
+Rhubarb puree w sugar
+Celery raw
+Juice orange w pulp
+Gravy 50% fat clear prep wo gravy instant powder
+Gravy 50% fat thickend prep wo gravy instant powder
+Bacon fat smoked raw
+Sausage spiced and smoked
+Drink soya wo sugar fortified w calcium and vitamins
+Drink soya light fortified w calcium and vitamins Alpro
+Drink soya w sugar fortified w calcium and vitamins
+Drink soya chocolate w sugar fortified w calcium and vitamins
+Pork schnitzel not breaded prepared
+Pork chop raw
+Pork fillet raw
+Meat av raw <5% fat excl liver
+Pork schnitzel satay breaded raw
+Salad dressing honey/mustard
+Puff pastry w butter baked
+Vol -au-vent shell made w butter
+Horse meat smoked
+Horse meat raw
+Salty puff pastry cocktail snacks
+Puff pastry wo butter baked
+Puff pastry av baked
+Vol -au-vent shell wo butter
+Sauce for chips approx 13% oil
+Marzipan
+Noodles instant prepared
+Sauce for chips 5% oil
+Popcorn sweet popped w oil
+Drink soya wo sugar
+Filo pastry unprepared
+Pasta wholemeal boiled
+Pasta white wo egg boiled
+Pasta white av boiled
+Brussel sprouts boiled
+Brussel sprouts raw
+Brussel sprouts frozen boiled
+Sweet pepper orange raw
+Sweet pepper yellow raw
+Sweet pepper green boiled
+Sweet pepper red raw
+Sweet pepper av raw
+Sweet pepper red boiled
+Sweet pepper yellow boiled
+Sweet pepper av boiled
+Onions boiled
+Beetroot pickled glass
+Cabbage green raw
+Cabbage green boiled
+Sweet pepper green raw
+Sorbet
+Solid foamed candy 'schuimpje'
+Swede raw
+Fruit juice drink ACE
+Aubergine/eggplant raw
+Rhubarb raw
+Cabbage sauerkraut raw
+Cabbage sauerkraut cooked
+Radish raw
+Wine gum/ fruit gum
+Cucumber sliced pickled glass
+Fruit drink conc Albert Heijn
+Soft drink w sugar and sweetener 2-<5 g CHO wo caffeine
+Juice drink w sugar and sweetener 4-6 g CHO
+Juice drink Capri-Sun Multivitamin
+Fruit juice drink multivit 12 fruits nectar light
+Fruit juice drink w sweetener 5-<8 g CHO
+Fruit juice drink Surango multivit nectar light
+Wine gums w foam layer
+Wine gum w liquorice
+Sweets jelly/gums/foam
+Kohlrabi boiled
+Kohlrabi raw
+Turnip raw
+Pasta white fresh boiled
+Goat meat raw av
+Breakfast cereal Honey pops Kellogg's
+Breakfast cereal Cornflakes Kellogg's
+Breakfast cereal Frosties Kellogg's
+Gravy 50% fat clear prepared w gravy instant powder
+Gravy 50% fat thickend prep w gravy instant powder
+Cereal bar Sultana Good Morning
+Cake Indonesian
+Pork fillet prepared
+Pork loin chop raw
+Pork rib chop raw
+Pork Chinese style Babi pangang wo rice
+Seeds and kernels av
+Protein bar w peanut
+Croutons
+Muesli bar
+Croissant chocolate-
+Muesli bar fortified w fibre
+Muesli crunchy w fruit fortified w fibre
+Muesli crunchy plain/w fruit
+Soup noodle prepared
+Muesli w fruit
+Breakfast cereal cornflakes Plus/1 de Beste
+Cereal bar wo sugar
+Breakfast cereal Cornflakes
+Couscous wholemeal boiled
+Soy sauce based on ketjap
+Horse-radish raw
+Cress garden raw
+Biscuit muesli
+Gravy average clear prep wo gravy instant powder
+Pork loin chop prepared
+Pork rib chop prepared
+Soup thickened w vegetables
+Salad dressing vinaigrette
+Hummus natural
+Plant-based alternative to cream based on soya
+Nougat
+Gado gado wo rice and wo egg
+Pulses average dried
+Plant-based alternative to cream based on soya Alpro Cuisine Light
+Olives av in brine tinned/glass
+Soup thickened no filling
+Soup clear w vegetables and noodles
+Soup clear w vegetables
+Prunes
+Gravy 25% fat clear prep wo gravy instant powder
+Gravy 25% fat thickend prep wo gravy instant powder 
+Sauce butter-
+Peas chick canned
+Peas chick canned/glass no salt added
+Flour rice Olvarit
+Flour rice
+Asparagus white tinned
+Taro boiled
+Taro raw
+Gravy 25% fat clear prep w gravy instant powder 
+Gravy 25% fat thickend prep w gravy instant powder 
+Wrap w chicken
+Snack roll puff pastry w Dutch sausage Frikandel
+Tapenade olive
+Hummus w vegetables
+Croissant prepared wo butter
+Crisps maize Bugles
+Cornmeal
+Vermicelli raw
+Pasta white raw
+Pasta w fibre Honig raw
+Hare whole raw
+Beans brown canned/glass no salt added
+Soup main course w legumes wo meat
+Beans white canned
+Beans brown canned
+Beans white baked in tomato sauce canned
+Candy mix
+Yeast fresh
+Teacakes chocolate coated marshmallow
+Rabbit domesticated raw
+Rabbit wild raw
+Rice drink wo sugar  fortified w calcium and vitamines
+Drink coconut w sugar fortified w calcium and vitamins
+Gravy 5% fat thickend prep wo gravy instant powder
+Gravy 5% fat clear prep wo gravy instant powder
+Satay pork w peanut sauce prepared
+Linseeds
+Oatmeal
+Wrap/tortilla white
+Croissant av
+Popcorn kernels
+Croissants canned baked
+Pasta gluten free raw Schar
+Barley malt
+Croissant prepared w butter
+Barley whole grain raw
+Barley pearl raw
+Rice drink wo sugar
+Pasta gluten free cooked Schar
+Barley easy cook raw
+Toffee w chocolate
+Peas marrowfat canned
+Beans cannellini canned
+Pasta w fibre Honig cooked
+Beans kidney red canned
+Beans kidney red canned/glass no salt added
+Herbs green fresh av
+Sauce Chinese soursweet home-made
+Coffee instant powder
+Lettuce romaine raw
+Beetroot raw
+Custard powder
+Cornstarch
+Mushroom boiled
+Mushroom tinned
+Blancmange powder chocolate instant
+Drink coconut wo sugar
+Flan filling tinned
+Coffee w sugar and milk vending machine
+Coffee w milk vending machine
+Prunes soaked in water
+Blancmange instant powder
+Honey
+Blancmange instant various flavours powd
+Artichoke raw
+Jelly
+Liquorice Dutch type sweet w foam
+Biscuit Dutch Amaretti Bitterkoekjes
+Gravy 5% fat thickend prep w gravy instant powder
+Gravy 5% fat clear prep w gravy instant powder
+Japanese rice cracker mix w peanuts
+Gravy prep wo fat w gravy instant powder 
+Lentils brown canned
+Beans chilli canned
+Soup clear w noodles
+Lentils canned/glass no salt added
+Stock from cube prepared
+Chicory raw
+Chicory boiled
+Porridge non-dairy barley w raisins Bessola
+Stock portion prepared
+Fruit juice drink juice and water
+Water 0-50 mg calcium p litre
+Water 50-100 mg calcium p litre
+Water >100 mg calcium p litre
+Coffee prepared
+Tea prepared
+Water av
+Breezer
+Fruit drink conc diluted 1 to 7
+Tea herbal instant sweetend prepared
+Vinegar
+Fruit juice drink Roosvicee 50/50
+Tea vending machine w sugar
+Coffee from vending machine w sugar
+Vinegar Balsamic
+Fruit juice concentrated prepared
+Partridge raw
+Chocolate butter
+Drink almond unsweetened fortified w calcium and vitamins
+Drink almond w sugar fortified w calcium and vitamins
+Sausage Dutch Frikandel w sauce and onion
+Peanut sauce homemade w water w fat
+Coconut grated, dried
+Coconut meat
+Bulgur wheat raw
+Drink almond unsweetened
+Pulses average boiled
+Peas marrowfat young canned
+Beans black canned
+Semolina
+Frogs/mice fondant w chocolate
+Ice lolly
+Lentils green and brown boiled
+Jam rose hip w vit C
+Couscous boiled
+Marmalade
+Peas split green boiled
+Fruit spread reduced sugar
+Fruit spread w sweetener
+Apple dried soaked in water
+Jam
+Peas green boiled
+Sauce fruit for pudding
+Fruit spread
+Cabbage pak-choi raw
+Juice multifruit
+Fruit mixed dried soaked in water
+Starch, potato
+Pear dried soaked in water
+Coconut water plain
+Juice fruit Healthy People Cranberry
+Ice lolly Festini
+Peanutsauce homemade w water milk wo fat
+Gravy Smeltjus prepared
+Drink oat wo sugar fortified w calcium and vitamins
+Pine nuts
+French fries w sauces and onions
+French fries w sauce and onion
+Peas chick boiled
+Drink oat wo sugar
+Cowberries
+Sauce w yellow split peas Dahl Surinam
+Peas marrowfat boiled
+Beans white boiled
+Asparagus white raw
+Asparagus white boiled
+Beans brown boiled
+Lentils red boiled
+Pumpkin boiled
+Pumpkin raw
+Fruit dried in brandy
+Fruit juice drink apple nectar
+Chewing gum
+Salsa tomato dip
+Abricots dried and soaked
+Beer w fruitjuice Radler
+Beer w fruit juice Radler alcohol free
+Melon av
+Margarine 80% fat >24 g sat fatty acids salted for NEVO recipes
+Chicken schnitzel satay breaded raw
+Salad dressing olive oil-vinegar
+Sauce hot liquid ready made <12% fat
+Chestnuts raw
+Beans kidney red boiled
+Smoothie fruit
+Cranberry compote sweetened
+Meringue
+Sausage Dutch Frikandel deep-fried in liquid fat
+Sausage Dutch Frikandel frozen unprep
+Chicken fillet raw
+Oil corn
+Oil sesame
+Oil vegetable av
+Oil rapeseed
+Peanut butter
+Peanut butter w peanut pieces
+Oil palm
+Peanut butter light
+Peanuts coated
+Peanut sauce concentrate
+Croquette meat ragout deep-fried in liquid fat
+Oil palmkernel
+Peanut sauce ready to eat
+Croquette meat ragout prepared in oven
+Croquette bitterbal oven frozen unprepared
+Croquette oven meat frozen unprepared
+Minced meat vegetarian based on mycoprotein unprepared
+Croquette meat ragout frozen unprep
+Stukjes vegetarisch based on mycoprotein unprepred
+Aniseed comfits crushed/pink&white/blue&white
+Couscous unprepared
+Kiwi fruit av
+Toffees
+Kiwi fruit yellow
+Noodles boiled
+Beetroot boiled
+Candy sugar-free
+Mentos cheewy dragee
+Swede boiled
+Syrup apple-pear
+Sugar castor brown
+Sugar castor white
+Sugar granulated
+Syrup Keukenstroop
+Syrup sugar
+Syrup apple
+Coloured sprinkles fruit-flavoured
+Chewing gum wo sugar
+Sweets boiled
+Peppermint
+Liquorice Stophoest
+Preparation ORS Orisel-Junior p 100 ml Nutricia
+Preparation ORS Orisel p 100 ml Nutricia
+Turkish Delight
+Syrup barley malt
+Syrup corn
+Syrup rice malt
+Liquorice w peppermint
+Salty liquorice lolly
+Energy drink Golden Power/Bullit/Freeway
+Sugar light
+Beer w fruit flavour
+Cane sugar
+Syrup apple fortified w iron
+Golden syrup pourable
+Sugar powdered
+Icing (sugar)
+Syrup maple
+Glasswort raw
+Dextrose tablets non-fortified
+Tilapia prepared wo fat
+Gurnard prepared in microwave oven no ingredients added
+Tuna prepared wo fat
+Lard
+Cheesecake made w quark
+Butter product 25% fat
+Plant-based alternative to fruit/vanilla yoghurt based on soya sweetened fortified w calcium and vitamins
+Plant-based alternative to yoghurt based on soya unsweetened fortified with calcium and vitamins
+Plant-based alternative to yoghurt based on soya sweetened fortified w calcium and vitamins
+Dessert soya fortified w calcium and vitamins
+Drink soya  fruit/vanilla w sugar fortified w calcium and vitamins
+Fruit juice drink Dubbeldrank
+Biscuit filled
+Fat animal av
+Tomatoes stewed w vegetable oil
+Cheese Feta
+Miso soya paste
+Mushroom fried in vegetable oil w salt
+Chinese noodle ball deep-fried in vegetable oil
+Almond paste filled tarts wo butter
+Snack sausage roll w bread dough pastry
+Snack sausage roll w bread dough frozen prepared in oven
+Flan hard shell w custard cream
+Flan sponge w custard cream
+Cereal bar Hero B'tween
+Soup legume based ready made
+Soup legume based dried packet prepared
+Mayonnaise product w olive oil
+Mayonnaise low fat 40% oil
+Sauce cocktail/party/table 25% oil
+Sauce for chips 35% oil
+Biscuit milkbiscuit AH/Jumbo
+Rice ball spiced frozen deep fried in vegetable oil
+Filet americain vegetarian based on milk fortified w iron
+Biscuit Liga Milkbreak milkbiscuit
+Satay chicken w peanut sauce prepared
+Cheese schnitzel vegetarian unprepared
+Biscuit Liga 12-36 months
+Almond paste filled tarts av
+Rice ball spiced frozen unprepared
+Burger vegetarian filled w vegetables and cheese unprepared
+Butter product half fat
+Soup vegetable based ready made
+Soup portion prepared
+Soup veg & meat based ready made
+Soup vegetable based dried packet prep
+Soup vegetable & meat based prepared pack
+Soup vegetable based low sodium prepared
+Salad Russian
+Oil safflower
+Frying oil
+Oil sunflower seed
+Oil soya
+Frying fat liquid
+Oil rice bran
+Frying fat horeca
+Oil wok
+Hemp seed
+Pumpkin seeds
+Sesame paste tahin salt added
+Poppy seeds
+Oil peanut
+Fat chicken
+Oil linseed
+Cassave crackers
+Chilli powder
+Flour soya full fat
+Cumin seed dried
+Cloves
+Sauce cocktail/party/table >25% oil
+Fat for gravy unprepared Smeltjus
+Sausage luncheon meat vegetarian fortified w iron and vit B12
+Pepper red cayenne
+Tomatoes dried in oil tin/glass, drained
+Oil olive
+Salad cream 25% oil
+Potato croquettes frozen prepared
+Mayonnaise product w yoghurt
+Biscuit salted
+Paprika powder
+Salad dressing 20% oil w yoghurt
+Chia seeds dried
+Pate vegetarian based on soya/pea
+Biscuit savoury Sultana Crunchers
+Sauce garlic 20-<30% oil
+Pepper red hot fried paste
+Sausage roast- vegetarian based on pea unprepared
+Schnitzel vegetarian based on milk filled w cheese unprepared
+Stock cube
+Pieces/chunks vegetarian based on soya/wheat unprepared fortified w iron and vit B12
+Nuggets vegetarian based on wheat/pea frozen unprepared
+Croquette oven vegetarian frozen unprepared
+Schnitzel vegetarian based on milk filled several flavours unprepared
+Chips fried in liquid frying fat
+Crispbakes Dutch farmers type
+Meatballs/burgers vegetarian based on soya/wheat unprepared
+Schnitzel/burger vegetarian based on milk unprepared
+Rosti rounds frozen unprepared
+Rosemary dried
+Chips prepared av
+Sausage luncheon meat vegetarian
+Bitterbal bereid in oven
+Santen creamed coconut block
+Plant-based alternative to cream based on oat
+Sausage roast- vegetarian based on soya/wheat unprepared fortified w iron and vit B12
+Potatoes sliced frozen deep-fried in vegetable oil
+Anise seed
+Bacon vegetarian unprepared
+Chick peas roasted leblebi Turkish
+Quinoa raw
+Vegetable balls/burgers vegetarian based on soya unprepared
+Rosti prepared wo fat
+Meatballs/burgers vegetarian based on pea unprepared
+Biscuit digestive
+Biscuit LU Time Out
+Sports food energy bar Isostar
+Oat bran
+Biscuit Evergreen crunchy
+Biscuit multigrain several flavours fortified w fibre, vit and min
+Gravy instant powder
+Biscuit Liga Haverkick
+Sauce mix packet >3% fat prepared
+Parsley dried
+Schnitzel vegetarian based on soya/wheat unprepared fortified w iron and vit B12
+Marjoram dried
+Pieces/chunks vegetarian based on soya/wheat unprepared
+Fish fingers vegetarian based on rice/wheat unprepared
+Cripsbakes Dutch low sodium
+Biscuit w currants Liga Evergreen
+Crispbakes Dutch wholemeal/multigrain
+Falafel unprepared
+Meatballs/burgers vegetarian based on soya/wheat unprepared fortified w iron and vit B12
+Biscuit Liga Evergreen assortment
+Beef fat
+Mix seasoning Mexican unprepared
+Pate vegetarian based on nutritional yeast
+Mustard low sodium
+Almond paste filled tarts w butter
+Chocolates filled/Belgium chocolate
+Biscuit Liga Baby 6-12 months
+Mixed spices Wereldgerechten unprep
+Stock powder
+Vegetable balls/burgers vegetarian based on soya unprepared fortified w iron and vit B12
+Rosti unprepared
+Crispbakes Dutch white
+Peanut sauce packet prepared
+Pepper red hot paste low sodium
+Tomato sun-dried
+Crackers cream
+Mustard
+Chips fried in solid frying fat
+Oil coconut
+Flour soya defatted
+Mix for marinade powder unprepared
+Mix spice and herbs rice/Chinese noodles unprepared
+Seasoning flavoured powder
+Herb and dried vegetable mix unprepared
+Bread crumbs
+Bread crumbs w herbs
+Coconut macaroons
+Pepper black/white
+Nutmeg powder
+Cinnamon powder
+Chervil dried
+Oregano dried
+Quinoa cooked
+Maltesers
+Stock powder low sodium
+Coconut bread sweetened sliced
+Flour spelt wholemeal
+Olives green in brine tinned/glass
+Soup instant powder
+Soup instant powder 1 cup soup
+Sauce mix packet <3% fat prepared
+Flour spelt
+Parsnip boiled
+Minced meat vegetarian based on soya unprepared
+Parsnip raw
+Beans white/ brown dried
+Peas marrowfat dried
+Pepper red hot paste
+Rye bread wholemeal low sodium
+Piccalilly
+Beans black eyed dried
+Pomegranate
+Topping dessert powder w sugar Klop-Klop
+Figs dried
+Lentils green and brown dried
+Beans kidney red dried
+Plant-based alternative to Gouda cheese based on coconut oil
+Vegetable mixed Mexico frozen unprepared
+Plant-based alternative to Gouda cheese based on coconut oil fortified w Ca and Vit B12
+Liquorice allsorts
+Minced meat vegetarian based on soya unprepared fortified w iron and vitamin B12 De Vegetarische Slager
+Syrup ginger
+Guava (pink fleshed)
+Apples dried
+Dandelion leaves raw
+Chives fresh
+Sauce oriental ready-made in jar/bag
+Mulberries raw
+Japanese rice cracker mix wo peanuts
+Plant-based alternative to yoghurt based on coconut unsweetened
+Seasoning flavoured powder low sodium
+Chili pepper raw
+Cabbage red w apple pieces frozen boiled
+Peas green dried
+Kiwi fruit green
+Passion fruit
+Peas split yellow/green dried
+Kumquat
+Ketchup curry
+Carambola
+Parsley fresh
+Ginger root
+Raspberries
+Bilberries in syrup tinned
+Raspberries in syrup tinned
+Peas and carrots frozen unprepared
+Shrimp paste trassie
+Mango
+Capers
+Bulgur wheat cooked
+Wok sauce teriyaki
+Mango chutney
+Beans mung boiled
+Juice carrot
+Lettuce butterhead boiled
+Lemon
+Fruit juice drink minimal 2 fruits fortified w vit C
+Minced meat vegetarian based on soya unprepared fortified w iron and vit B12
+Apricots in syrup tinned
+Lychees
+Tannia prepared wo fat
+Medlar
+Infant food fruit 6 months
+Sweets marshmallow type Spekkie
+Cherries sweet
+Blackberries
+Lime
+Breakfast drink Coolbest FruitOntbijt p 100ml
+Fruit mixed dried
+Sauce chocolate for pudding
+Basil fresh
+Cherries in syrup tinned
+Jackfruit in water canned
+Fruit juice drink Roosvicee Multivit
+Ketchup hot chilli
+Soup meat based ready made
+Peas split yellow boiled
+Asparagus green raw
+Mint fresh
+Beans runner tinned
+Bitter gourd pods raw
+Bitter gourd pods boiled
+Manderins
+Ice tea w sugar and sweetener
+Bean sprouts raw
+Infant food fruit 8 months
+Infant food fruit 12 months
+Fruit drink concentrate Roosvicee Multivit
+Ice tea light
+Fruit juice conc fortified w vit C
+Wine alcohol free
+Infant food fruit 4 months
+Rocket raw
+Pineapple
+Cranberries fresh
+Pineapple in syrup tinned
+Apple sauce tinned
+Fruit in own juice tinned
+Nectarine
+Bean sprouts boiled
+Silver-skin onion sweet pickled glass
+Cabbage pak-choi cooked
+Lettuce lambs raw
+Beans long yard Kousenband boiled
+Fruit forest av
+Fruit in syrup tinned
+Juice apple
+Pineapple in own juice tinned
+Ketchup tomato
+Marshmallows
+Soy sauce
+Mustard leaves boiled
+Papaya
+Dates fresh
+Juice multifruit mild w vit C
+Juice grape
+Liquorice Dutch type sweet
+Soup meat based dried packet prepared
+Fruit drink conc w sugar and sweetener 40-45 g CHO
+Fruit drink concentrate light
+Fruit drink conc w sugar and sweetener 10-15 g CHO
+Fruit drink concentrate w sweetener Karvan Cevitam
+Juice grapefruit
+Mange-tout raw
+Swiss chard leaf boiled
+Radish black raw
+Strawberries
+Apricots w skin
+Blueberries
+Redcurrants
+Blackcurrants
+Bilberries
+Grapefruit
+Gooseberries
+Melon netted
+Cherries sour
+Peach wo skin
+Plums w skin
+Strawberries in syrup tinned
+Apricots dried
+Dates dried
+Fruit cocktail in syrup tinned
+Currants dried
+Tangerines in syrup tinned
+Peaches in syrup tinned
+Plums in syrup tinned
+Tapioca
+Fruit juice drink redcurrent
+Gin Dutch red currant flavoured
+Fruit juice drink blackcurrant
+Juice redcurrant
+Beer old brown
+Beer pilsner
+Brandy
+Campari
+Gin Dutch lemon flavoured
+Cognac
+Soft drink w sugar w caffeine
+Fruit juice drink raspberry
+Soft drink m sugar wo caffeine
+Gin young Dutch
+Gin old Dutch
+Liqueur 15-25 vol% alcohol
+Muscatel
+Port wine
+Rum
+Sherry
+Tomato juice
+Vermouth
+Brandy Dutch vieux
+Juice drink w sugar
+Whisky
+Softdrink w milk serum and sweetener Rivella
+Sauce barbecue
+Ginger stem in syrup tinned
+Fruit drink concentrate undiluted
+Fruit drink concentrate fruit mix w rose hip
+Fruit drink concentrate Roosvicee Fruitkracht Ferro
+Fruit drink concentrate Roosvicee Fruitkracht Pruimen
+Liquorice Dutch type salted
+Liquorice Dutch type double salted
+Sauce tomato based shashlik
+Swiss chard leaf raw
+Tannia raw
+Antroewa raw
+Dagoe leaf raw
+Kaisoi raw
+Beans long yard Kousenband raw
+Bottlegourd poeng
+Tannia leaves raw
+Tamarind
+Flour cassava
+Mineral water sparkling and not sparkling av
+Jagermeister herb liquor
+Salad dressing natural wo oil
+Grapefruit in syrup canned
+Madeira
+Seasoning flavoured liquid
+Juice beetroot
+Sweets fruit pectinbased
+Juice pear
+Mange-tout boiled
+Figs fresh
+Kaki / Sharon fruit
+Preparation glucose powder
+Melon water
+Melon honeydew
+Melon in syrup canned
+Strawberry puree tinned
+Peas extra fine low sodium tinned
+Juice lemon fresh
+Juice tomato/vegetable
+Mushroom low sodium tinned
+Berenburg herb liquor
+Vegetables mixture for soup frozen unprepared
+Juice tomato/vegetable low sodium
+Gherkins sweet pickled low sodium
+Onion silver-skin sweet pickled low sodium glass
+Onion silverskin sweet pickled wo sugar glass
+Bamboo shoots tinned
+Salt low sodium LoSalt
+Soy sauce salt ketjap
+Soy sauce sweet low sodium ketjap
+Soy sauce sweet ketjap
+Monosodium glutamate Ve-tsin
+Infant food vegetables 4 months
+Fruit drink w dairy Taksi w sugar
+Grape leaves glass
+Vegetables pickled Turkish Tursu
+Liquorice Dutch type av
+Juice pineapple
+Fruit juice drink minimal 2 fruits
+Liqueur <15 vol% alcohol
+Liqueur >25 vol% alcohol
+Beer >7 vol% alcohol
+Beer alcohol free <0,1 vol%
+Beer low alcohol 0,1-1,2 vol%
+Juice drink light
+Soft drink light wo caffeine
+Cola light soft drink w caffeine
+Fructose powder
+Fruit juice concentrated
+Juice sauerkraut
+Fruit drink concentrate Karvan Cevitam
+Juice tomato/vegetable Appelsientje Tomatientje
+Juice tomato Appelsientje Zontomaat
+Sports food Isostar Actifood
+Sports food Isostar power tabs
+Sports drink AA Isotone
+Sports drink hypertone w carbohydrates
+Ice tea w sugar 5-<7 g CHO
+Juice drink Dubbelfrisss
+Juice drink Tintelfruit w sugar
+Juice drink Tintelfruit light
+Mineral water w sweetener
+Juice apple fortified w vitamin C
+Juice fruit Coolbest Vitaday tropical
+Juice fruit Coolbest Vitaday original
+Sports drink Extran Energy
+Sports drink Extran Hydro
+Tannia leaves prepared wo fat
+Liquorice sugar-free
+Wine rose
+Soft drink w sugar and sweetener 2-<5 CHO w caffeine
+Sports drink Aquarius
+Tea herbal instant sweetend powder
+Soft drink w sugar and sweetener 5-<8 g CHO w caffeine
+Energy drink Red Bull
+Energy drink Red Bull sugarfree
+Ice tea w sugar 4-<5 g CHO
+Fruit drink w dairy Taksi w sweetener
+Juice drink Ocean Spray Cranberry classic
+Shandy
+Beer white
+Fruit drink conc w sugar and sweetener 20-25 g CHO
+Fruit drink conc w 45-50 mg vit C
+Beer bock
+Fruit drink w dairy w sugar and sweetener
+Fruit drink conc w sugar and sweetener 30-35 g CHO
+Juice drink w sugar and sweetener 7-9 g CHO
+Pear dried
+Pears in syrup tinned
+Celery leaves fresh
+Sweet fruity chew
+Vodka
+Black nightshade raw
+Amaranth leaves raw
+Lemon grass powder
+Frying fat solid
+Biscuit filled chocolate coated
+Oil Becel Blend Classic
+Basil dried
+Curry powder djawa
+Cranberries dried sweetened
+Goji berries dried
+Jerusalem artichoke raw
+Locust bean gum
+Turnip boiled
+Bitterbal meat ragout deep-fried in liquid fat
+Sauce hot liquid ready made >12% fat
+tulumba tatlisi fried eclair Turkish
+Liver haddock tinned
+Infant food meal 15 months
+Vegetable dish w meat turlu Turkish prep
+Infant food meal 18 months
+Infant food meal 6 months
+Infant food meal 8 months
+Beef salted dried Surinam
+Cheese Ricotta
+Sweetener intensive based on carbohydrates
+Sauce oyster
+Brains calf's raw
+Infant food meal 12 months
+Cereal bar w milk Kellogg's
+Breakfast cereal Tresor Kellogg's
+Amaranth seed, black
+Amaranth seed, pale brown
+Bajra
+Barley
+Jowar
+Maize, dry
+Maize, tender, local
+Maize, tender, sweet
+Quinoa
+Ragi
+Rice flakes
+Rice puffed
+Rice, raw, brown
+Rice, parboiled, milled
+Rice, raw, milled
+Samai
+Varagu
+Wheat flour, refined
+Wheat flour, atta
+Wheat, whole
+Wheat, bulgur
+Wheat, semolina
+Wheat, vermicelli
+Wheat, vermicelli, roasted
+Bengal gram, dal
+Bengal gram, whole
+Black gram, dal
+Black gram, whole
+Cowpea, brown
+Cowpea, white
+Field bean, black
+Field bean, brown
+Field bean, white
+Green gram, dal
+Green gram, whole
+Horse gram, whole
+Lentil dal
+Lentil whole, brown
+Lentil whole, yellowish
+Moth bean
+Peas, dry
+Rajmah, black
+Rajmah, brown
+Rajmah, red
+Red gram, dal
+Red gram, whole
+Ricebean
+Soya bean, brown
+Soya bean, white
+Agathi leaves
+Amaranth leaves, green
+Amaranth leaves, red mix
+Amaranth leaves, red and green mix
+Amaranth spinosus, leaves, green mix
+Amaranth spinosus, leaves, red and green mix
+Basella leaves
+Bathua leaves
+Beet greens
+Betel leaves, big (kolkata)
+Betel leaves, small
+Brussels sprouts
+Cabbage, Chinese
+Cabbage, collard greens
+Cabbage, green
+Cabbage, violet
+Cauliflower leaves
+Colocasia leaves, green
+Drumstick leaves
+Fenugreek leaves
+Garden cress
+Gogu leaves, green
+Gogu leaves, red
+Knol-Khol, leaves
+Lettuce
+Mustard leaves
+Pak Choi leaves
+Parsley
+Ponnaganni
+Pumpkin leaves, tender
+Radish leaves
+Rumex leaves
+Spinach
+Tamarind leaves, tender
+Ash gourd
+Bamboo shoot, tender
+Bean scarlet, tender
+Bitter gourd, jagged, teeth ridges, elongate
+Bitter gourd, jagged, teeth ridges, short
+Bitter gourd, jagged, smooth ridges, elongate
+Bottle gourd, elongate, pale green
+Bottle gourd, round, pale green
+Bottle gourd, elongate, dark green
+Brinjal-1
+Brinjal-2
+Brinjal-3
+Brinjal-4
+Brinjal-5
+Brinjal-6
+Brinjal-7
+Brinjal-8
+Brinjal-9
+Brinjal-10
+Brinjal-11
+Brinjal-12
+Brinjal-13
+Brinjal-14
+Brinjal-15
+Brinjal-16
+Brinjal-17
+Brinjal-18
+Brinjal-19
+Brinjal-20
+Brinjal-21
+Brinjal - all varieties
+Broad beans
+Capsicum, green
+Capsicum, red
+Capsicum, yellow
+Cauliflower
+Celery stalk
+Cho-cho-marrow
+Cluster beans
+Colocasia, stem, black
+Colocasia, stem, green
+Corn, Baby
+Cucumber, green, elongate
+Cucumber, green, short
+Cucumber, orange, round
+Drumstick
+Field beans, tender, broad
+Field beans, tender, lean
+French beans, country
+French beans, hybrid
+Jack fruit, raw
+Jack fruit, seed, mature
+Knol - Khol
+Kovai, big
+Kovai, small
+Ladies finger
+Mango, green, raw
+Onion, stalk
+Papaya, raw
+Parwar
+Peas, fresh
+Plantain, flower
+Plantain, green
+Plantain, stem
+Pumpkin, green, cylindrical
+Pumpkin, orange, round
+Red gram, tender, fresh
+Ridge gourd
+Ridge gourd, smooth skin
+Snake gourd, long, pale green
+Snake gourd, long, dark green
+Snake gourd, short
+Tinda, tender
+Tomato, green
+Tomato, ripe, hybrid
+Tomato, ripe, local
+Zucchini, green
+Zucchini, yellow
+Apple, big
+Apple, green
+Apple, small
+Apple, small, Kashmir
+Apricot, dried
+Apricot, processed
+Avocado fruit
+Bael fruit
+Banana, ripe, montham
+Banana, ripe, poovam
+Banana, ripe, red
+Banana, ripe, robusta
+Black berry
+Cherries, red
+Currants, black
+Custard apple
+Dates, dry, pale brown
+Dates, dry, dark brown
+Dates, processed
+Fig
+Goosberry
+Grapes, seeded, round, black
+Grapes, seeded, round, green
+Grapes, seeded, round, red
+Grapes, seedless, oval, black
+Grapes, seedless, round, green
+Grapes, seedless, round, black
+Guava, white flesh
+Guava, pink flesh
+Jack fruit, ripe
+Jambu fruit, ripe
+Karonda fruit
+Lemon, juice
+Lime, sweet, pulp
+Litchi
+Mango, ripe, banganapalli
+Mango, ripe, gulabkhas
+Mango, ripe, himsagar
+Mango, ripe, kesar
+Mango, ripe, neelam
+Mango, ripe, paheri
+Mango, ripe, totapari
+Mangosteen
+Manila tamarind
+Musk melon, orange flesh
+Musk melon, yellow flesh
+Orange, pulp
+Palm fruit, tender
+Papaya, ripe
+Peach
+Pear
+Phalsa
+Pineapple
+Plum
+Pomegranate, maroon seeds
+Pummelo
+Raisins, dried, black
+Raisins, dried, golden
+Rambutan
+Sapota
+Soursop
+Star fruit
+Strawberry
+Tamarind, pulp
+Water melon, dark green (sugar baby)
+Water melon, pale green
+Wood Apple
+Zizyphus
+Beet root
+Carrot, orange
+Carrot, red
+Colocasia
+Lotus root
+Potato, brown skin, big
+Potato, brown skin, small
+Potato, red skin
+Radish, elongate, red skin
+Radish, elongate, white skin
+Radish, round, red skin
+Radish, round, white skin
+Sweet potato, brown skin
+Sweet potato, pink skin
+Tapioca
+Water Chestnut
+Yam, elephant
+Yam, ordinary
+Yam, wild
+Chillies, green-1
+Chillies, green-2
+Chillies, green-3
+Chillies, green-4
+Chillies, green-5
+Chillies, green-6
+Chillies, green-7
+Chillies, green - all varieties
+Coriander leaves
+Curry leaves
+Garlic, big clove
+Garlic, small clove
+Garlic, single clove, Kashmir
+Ginger, fresh
+Mango ginger
+Mint leaves
+Onion, big
+Onion, small
+Asafoetida
+Cardamom, green
+Cardamom, black
+Chillies, red
+Cloves
+Coriander seeds
+Cumin seeds
+Fenugreek seeds
+Mace
+Nutmeg
+Omum
+Pippali
+Pepper, black
+Poppy seeds
+Turmeric powder
+Almond
+Arecanut, dried, brown
+Arecanut, dried, red color
+Arecanut, fresh
+Cashew nut
+Coconut, kernal, dry
+Coconut, kernel, fresh
+Garden cress, seeds
+Gingelly seeds, black
+Gingelly seeds, brown
+Gingelly seeds, white
+Ground nut
+Mustard seeds
+Linseeds
+Niger seeds, black
+Niger seeds, gray
+Pine seed
+Pistachio nuts
+Safflower seeds
+Sunflower seeds
+Walnut
+Jaggery, cane
+Sugarcane, juice
+Button mushroom, fresh
+Chicken mushroom, fresh
+Shiitake mushroom, fresh
+Oyster mushroom, dried
+Toddy
+Coconut Water
+Milk, whole, Buffalo
+Milk, whole, Cow
+Paneer
+Khoa
+Egg, poultry, whole, raw
+Egg, poultry, white, raw
+Egg, poultry, yolk, raw
+Egg, poultry, whole, boiled
+Egg, poultry, white, boiled
+Egg, poultry, yolk, boiled
+Egg, poultry, omlet
+Egg, country hen, whole, raw
+Egg, country hen, whole, boiled
+Egg, country hen, omlet
+Egg, duck, whole, boiled
+Egg, duck, whole, raw
+Egg, duck, whole, omlet
+Egg, quial, whole, raw
+Egg, quial, whole, boiled
+Chicken, poultry, leg, skinless
+Chicken, poultry, thigh, skinless
+Chicken, poultry, breast, skinless
+Chicken, poultry, wing, skinless
+Poultry, chicken, liver
+Poultry, chicken, gizzard
+Country hen, leg, with skin
+Country hen, thigh, with skin
+Country hen, breast, with skin
+Country hen, wing, with skin
+Duck, meat, with skin
+Emu, meat, skinless
+Guinea fowl, meat, with skin
+Pigeon, meat, with skin
+Quail, meat, skinless
+Turkey, leg, with skin
+Turkey, thigh, with skin
+Turkey, breast, with skin
+Turkey, wing, with skin
+Goat, shoulder, meat
+Goat, chops
+Goat, legs
+Goat, brain
+Goat, tongue
+Goat, lungs
+Goat, heart
+Goat, liver
+Goat, tripe
+Goat, spleen
+Goat, kidneys
+Goat, tube (small intestine)
+Goat, testis
+Sheep, shoulder
+Sheep, chops
+Sheep, leg
+Sheep, brain
+Sheep, tongue
+Sheep, lungs
+Sheep, heart
+Sheep, liver
+Sheep, tripe
+Sheep, spleen
+Sheep, kidneys
+Beef, shoulder
+Beef, chops
+Beef, round (leg)
+Beef, brain
+Beef, tongue
+Beef, lungs
+Beef, heart
+Beef, liver
+Beef, tripe
+Beef, spleen
+Beef, kidneys
+Calf, shoulder
+Calf, chops
+Calf, round (leg)
+Calf, brain
+Calf, tongue
+Calf, heart
+Calf, liver
+Calf, spleen
+Calf, kidneys
+Mithun, shoulder
+Mithun, chops
+Mithun, round (leg)
+Pork, shoulder
+Pork, chops
+Pork, ham
+Pork, lungs
+Pork, heart
+Pork, liver
+Pork, stomach
+Pork, spleen
+Pork, kidneys
+Pork, tube (small intestine)
+Hare, shoulder
+Hare, chops
+Hare, leg
+Rabbit, shoulder
+Rabbit, chops
+Rabbit, leg
+Allathi
+Aluva
+Anchovy
+Ari fish
+Betki
+Black snapper
+Bombay duck
+Bommuralu
+Cat fish
+Chakla
+Chappal
+Chelu
+Chembali
+Eri meen
+Gobro
+Guitar fish
+Hilsa
+Jallal
+Jathi vela meen
+Kadal bral
+Kadali
+Kalamaara
+Kalava
+Kanamayya
+Kannadi paarai
+Karimeen
+Karnagawala
+Kayrai
+Kiriyan
+Kite fish
+Korka
+Kulam paarai
+Maagaa
+Mackerel
+Manda clathi
+Matha
+Milk fish
+Moon fish
+Mullet
+Mural
+Myil meen
+Nalla bontha
+Narba
+Paarai
+Padayappa
+Pali kora
+Pambada
+Pandukopa
+Parava
+Parcus
+Parrot fish
+Perinkilichai
+Phopat
+Piranha
+Pomfret, black
+Pomfret, snub nose
+Pomfret, white
+Pranel
+Pulli paarai
+Queen fish
+Raai fish
+Raai vanthu
+Rani
+Ray fish, bow head, spotted
+Red snapper
+Red snapper, small
+Sadaya
+Salmon
+Sangada
+Sankata paarai
+Sardine
+Shark
+Shark, hammer head
+Shark, spotted
+Shelavu
+Silan
+Silk fish
+Silver carp
+Sole fish
+Stingray
+Tarlava
+Tholam
+Tilapia
+Tuna
+Tuna, striped
+Valava
+Vanjaram
+Vela meen
+Vora
+Whale shark
+Xiphinis
+Eggs, Cat fish
+Crab
+Crab, sea
+Lobster, brown
+Lobster, king size
+Mud crab
+Oyster
+Tiger prawns, brown
+Tiger Prawns, orange
+Clam, green shell
+Clam, white shell, ribbed
+Octopus
+Squid, black
+Squid, hard shell
+Squid, red
+Squid, white, small
+Cat fish
+Catla
+Freshwater Eel
+Gold fish
+Pangas
+Rohu
+Crab
+Prawns, big
+Prawns, small
+Tiger prawns
+Coconut oil
+Corn oil
+Cotton seed oil
+Gingelly oil
+Groundnut oil
+Mustard oil
+Palm oil
+Rice bran oil
+Safflower oil
+Safflower oil (blended)
+Soyabean oil
+Sunflower oil
+Ghee
+Vanaspati
+`;
+
+// You can also use a real file by replacing the Blob with the actual file.
+const blob = new Blob([fileContent], { type: 'text/plain' });
+readFile(blob);
+</script>
