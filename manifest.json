@@ -7,5 +7,5 @@
       "sizes": "300x300"
     }
   ],
-  "display": "minimal-ui"
+  "display": "standalone"
 }
